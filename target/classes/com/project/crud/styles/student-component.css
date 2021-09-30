@@ -1,0 +1,13 @@
+.student-entry {
+    -fx-text-fill: white;
+    -fx-background-color: #2f3136;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+
+.student-entry:hover {
+    -fx-text-fill: white;
+    -fx-background-color: #33353b;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
