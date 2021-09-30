@@ -346,20 +346,21 @@ public class CrudRedesignController implements Initializable  {
 
                 write = new BufferedWriter( new FileWriter( "database/students-list.txt" ) );
                 write.write( newFileContent.toString() );
+                selectedStudent = null;
+
+                addStudents( getStudents() );
+                closePane();
+
+                Alert alert = new Alert( Alert.AlertType.INFORMATION );
+                alert.setTitle( "Success!" );
+                alert.setHeaderText( "You have successfully deleted a student entry." );
+                alert.showAndWait();
             } catch ( IOException err ) {
                 System.err.println( "Warning! IOException has occurred at confirmDeleteStudent() function: " + err.getMessage() );
             } finally {
                 if ( read != null ) read.close();
                 if ( write != null ) write.close();
             }
-
-            addStudents( getStudents() );
-            closePane();
-
-            Alert alert = new Alert( Alert.AlertType.INFORMATION );
-            alert.setTitle( "Success!" );
-            alert.setHeaderText( "You have successfully deleted a student entry." );
-            alert.showAndWait();
         }
     }
 
@@ -378,13 +379,12 @@ public class CrudRedesignController implements Initializable  {
                 students.add( new Student( Integer.parseInt( entry[0] ), entry[1], entry[2], Integer.parseInt( entry[3] ), Integer.parseInt( entry[4] ), entry[5], entry[6] ) );
             }
 
+            addStudents( students );
         } catch ( IOException err ) {
             System.err.println( "Warning! IOException has occurred at searchStudents() function: " + err.getMessage() );
         } finally {
             if ( read != null ) read.close();
         }
-
-        addStudents( students );
     }
 
     @FXML
