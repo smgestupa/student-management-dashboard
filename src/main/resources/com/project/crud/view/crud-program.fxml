@@ -569,7 +569,7 @@
                                  </font></Button>
                            </children>
                         </Pane>
-                        <Pane prefHeight="101.0" prefWidth="316.0" />
+                        <Pane prefHeight="101.0" prefWidth="343.0" />
                         <Pane prefHeight="101.0" prefWidth="262.0" HBox.hgrow="ALWAYS">
                            <children>
                               <ComboBox fx:id="sortingBox" layoutX="86.0" layoutY="49.0" onAction="#sortStudents" prefHeight="33.0" prefWidth="150.0" />

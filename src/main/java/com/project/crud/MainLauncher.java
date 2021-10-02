@@ -13,7 +13,6 @@ public class MainLauncher extends Application {
     public void start( Stage stage ) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader( MainLauncher.class.getResource( "view/crud-program.fxml" ) );
         Scene scene = new Scene( fxmlLoader.load() );
-        stage.setTitle( "Hello!" );
         stage.setScene( scene );
         stage.initStyle( StageStyle.UNDECORATED );
         stage.show();
