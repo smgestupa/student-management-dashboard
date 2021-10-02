@@ -2,7 +2,6 @@ package com.project.crud.controller;
 
 import com.project.crud.listener.Listen;
 import com.project.crud.model.Student;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -99,36 +98,67 @@ public class CrudRedesignController implements Initializable  {
     }
 
     public void addStudents( List< Student > studentsList ) {
-        students.clear();
-        students.addAll( studentsList );
-        if ( sortingBox.getSelectionModel().getSelectedIndex() == 1 ) students.sort( Comparator.comparing( Student::getStudentNumber ) );
-        else if ( sortingBox.getSelectionModel().getSelectedIndex() == 2 ) students.sort( Comparator.comparing( Student::getLastName ) );
-        if ( students.size() > 0 ) {
-            listener = new Listen() {
-                @Override
-                public void onClickListener( MouseEvent event, Student student ) {
-                    if ( event.getButton().equals( MouseButton.PRIMARY ) ) {
-                        selectedStudent = student;
+        int column = 0;
+        int row = 1;
 
-                        if ( event.getClickCount() == 2 ) {
-                            infoStudentIdLabel.setText( String.valueOf( student.getStudentNumber() ) );
-                            infoFirstNameLabel.setText( student.getFirstName() );
-                            infoLastNameLabel.setText( student.getLastName() );
-                            infoAgeLabel.setText( String.valueOf( student.getAge() ) );
-                            infoGenderLabel.setText( student.getGender() );
-                            infoYearLevelLabel.setText( String.valueOf( student.getYearLevel() ) );
-                            infoProgramLabel.setText( student.getProgram() );
-                            if ( student.getGender().equals( "Male" ) ) infoStudentImage.setImage( new Image( this.getClass().getResourceAsStream( "/com/project/crud/images/male-student.png" ) ) );
-                            else infoStudentImage.setImage( new Image( this.getClass().getResourceAsStream( "/com/project/crud/images/female-student.png" ) ) );
+        try {
+            grid.getChildren().clear();
+            students.clear();
+            students.addAll( studentsList );
+            if ( sortingBox.getSelectionModel().getSelectedIndex() == 1 ) students.sort( Comparator.comparing( Student::getStudentNumber ) );
+                else if ( sortingBox.getSelectionModel().getSelectedIndex() == 2 ) students.sort( Comparator.comparing( Student::getLastName ) );
+            if ( students.size() > 0 ) {
+                listener = new Listen() {
+                    @Override
+                    public void onClickListener( MouseEvent event, Student student ) {
+                        if ( event.getButton().equals( MouseButton.PRIMARY ) ) {
+                            selectedStudent = student;
 
-                            studentInfoPane.toFront();
+                            if ( event.getClickCount() == 2 ) {
+                                infoStudentIdLabel.setText( String.valueOf( student.getStudentNumber() ) );
+                                infoFirstNameLabel.setText( student.getFirstName() );
+                                infoLastNameLabel.setText( student.getLastName() );
+                                infoAgeLabel.setText( String.valueOf( student.getAge() ) );
+                                infoGenderLabel.setText( student.getGender() );
+                                infoYearLevelLabel.setText( String.valueOf( student.getYearLevel() ) );
+                                infoProgramLabel.setText( student.getProgram() );
+                                if ( student.getGender().equals( "Male" ) ) infoStudentImage.setImage( new Image( this.getClass().getResourceAsStream( "/com/project/crud/images/male-student.png" ) ) );
+                                else infoStudentImage.setImage( new Image( this.getClass().getResourceAsStream( "/com/project/crud/images/female-student.png" ) ) );
+
+                                studentInfoPane.toFront();
+                            }
                         }
                     }
-                }
-            };
-        }
+                };
+            }
 
-        new GridController( students, grid, listener );
+            for ( Student student : students ) {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation( getClass().getResource( "/com/project/crud/components/student-model.fxml" ) );
+                VBox vbox = loader.load();
+
+                StudentController studentController = loader.getController();
+                studentController.setData( student, listener );
+
+                if ( column == 4 ) {
+                    column = 0;
+                    row++;
+                }
+
+                grid.add( vbox, column++, row );
+                grid.setMinWidth( Region.USE_COMPUTED_SIZE );
+                grid.setPrefWidth( Region.USE_COMPUTED_SIZE );
+                grid.setMaxWidth( Region.USE_PREF_SIZE );
+
+                grid.setMinHeight( Region.USE_COMPUTED_SIZE );
+                grid.setPrefHeight( Region.USE_COMPUTED_SIZE );
+                grid.setMaxHeight( Region.USE_PREF_SIZE );
+
+                GridPane.setMargin( vbox, new Insets( 17 ) );
+            }
+        } catch ( IOException err ) {
+            System.err.println( "Warning! IOException has occurred at addStudents() function: " + err.getMessage() );
+        }
     }
 
     @FXML
