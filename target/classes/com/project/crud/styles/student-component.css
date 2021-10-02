@@ -6,19 +6,8 @@
 }
 
 .student-entry:hover {
-    -fx-scale-x: 105%;
-    -fx-scale-y: 105%;
-    -fx-background-color: #282a2e;
-    -fx-background-radius: 8px;
     -fx-text-fill: white;
-    -fx-cursor: hand;
-}
-
-.student-entry:pressed {
-    -fx-scale-x: 115%;
-    -fx-scale-y: 115%;
-    -fx-background-color: #282a2e;
+    -fx-background-color: #33353b;
     -fx-background-radius: 8px;
-    -fx-text-fill: white;
     -fx-cursor: hand;
 }
