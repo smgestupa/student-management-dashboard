@@ -12,6 +12,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -299,7 +300,7 @@
                         </Pane>
                         <Pane prefHeight="83.0" prefWidth="420.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <Button fx:id="addStudentEntry" layoutX="246.0" layoutY="19.0" mnemonicParsing="false" onMouseClicked="#addStudent" prefHeight="46.0" prefWidth="160.0" style="-fx-font-weight: bold;" styleClass="default-button" stylesheets="@../styles/buttons.css" text="Add Student" textFill="WHITE">
+                              <Button fx:id="addStudentEntry" layoutX="212.0" layoutY="19.0" mnemonicParsing="false" onMouseClicked="#addStudent" prefHeight="46.0" prefWidth="194.0" style="-fx-font-weight: bold;" styleClass="default-button" stylesheets="@../styles/buttons.css" text="Add Student" textFill="WHITE">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
@@ -393,7 +394,7 @@
                         </Pane>
                         <Pane prefHeight="83.0" prefWidth="420.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <Button fx:id="editStudentEntry" layoutX="225.0" layoutY="19.0" mnemonicParsing="false" onMouseClicked="#editStudent" prefHeight="46.0" prefWidth="181.0" styleClass="default-button" stylesheets="@../styles/buttons.css" text="Update Student">
+                              <Button fx:id="editStudentEntry" layoutX="212.0" layoutY="19.0" mnemonicParsing="false" onMouseClicked="#editStudent" prefHeight="46.0" prefWidth="194.0" styleClass="default-button" stylesheets="@../styles/buttons.css" text="Update Student">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
@@ -607,15 +608,24 @@
               <menus>
                 <Menu mnemonicParsing="false" text="Actions">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Add Student" />
-                        <MenuItem mnemonicParsing="false" text="Edit Student" />
-                        <MenuItem mnemonicParsing="false" text="Delete Student" />
+                    <MenuItem mnemonicParsing="false" onAction="#openAddStudentPane" text="Add Student">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="A" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator></MenuItem>
+                        <MenuItem mnemonicParsing="false" onAction="#openEditStudentPane" text="Edit Student">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="E" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator></MenuItem>
+                        <MenuItem mnemonicParsing="false" onAction="#openDeleteStudentPane" text="Delete Student">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="D" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator></MenuItem>
                   </items>
                 </Menu>
                   <Menu mnemonicParsing="false" text="About">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="What is this?" />
-                        <MenuItem mnemonicParsing="false" text="Version" />
+                        <MenuItem mnemonicParsing="false" onAction="#whatIsThis" text="What is this?" />
+                        <MenuItem mnemonicParsing="false" onAction="#programVersion" text="Version" />
                      </items>
                   </Menu>
               </menus>

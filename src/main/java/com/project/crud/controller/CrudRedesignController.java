@@ -370,6 +370,10 @@ public class CrudRedesignController implements Initializable  {
         confirm.setTitle( "Confirmation Required" );
         confirm.setHeaderText( "Would you like to delete " + selectedStudent.getFirstName() + "'s entry?" );
 
+        DialogPane dialog = confirm.getDialogPane();
+        dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+        dialog.getStyleClass().add( "dialog" );
+
         Optional< ButtonType > result = confirm.showAndWait();
         if ( result.get() == ButtonType.OK) {
             try {
@@ -403,9 +407,9 @@ public class CrudRedesignController implements Initializable  {
                     alert.setTitle( "Success!" );
                     alert.setHeaderText( "You have successfully deleted a student entry." );
 
-                    DialogPane dialog = alert.getDialogPane();
-                    dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
-                    dialog.getStyleClass().add( "dialog" );
+                    DialogPane dialogSuccess = alert.getDialogPane();
+                    dialogSuccess.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+                    dialogSuccess.getStyleClass().add( "dialog" );
 
                     alert.showAndWait();
                 }
@@ -585,4 +589,31 @@ public class CrudRedesignController implements Initializable  {
         }
     }
 
+    @FXML
+    void whatIsThis() {
+        Alert info = new Alert( Alert.AlertType.INFORMATION );
+        info.setTitle( "What is this?" );
+        info.setHeaderText( "Student Management Dashboard");
+        info.setContentText( "This is a dashboard application, made in JavaFX that allows you to easily manage student information.");
+
+        DialogPane dialog = info.getDialogPane();
+        dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+        dialog.getStyleClass().add( "dialog" );
+
+        info.showAndWait();
+    }
+
+    @FXML
+    void programVersion() {
+        Alert info = new Alert( Alert.AlertType.INFORMATION );
+        info.setTitle( "Program Version" );
+        info.setHeaderText( "Version 1.0 – Revision 2");
+        info.setContentText( "Made by Team Positive.");
+
+        DialogPane dialog = info.getDialogPane();
+        dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+        dialog.getStyleClass().add( "dialog" );
+
+        info.showAndWait();
+    }
 }
