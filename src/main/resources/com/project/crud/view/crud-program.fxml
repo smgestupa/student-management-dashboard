@@ -605,21 +605,19 @@
             </HBox>
             <MenuBar>
               <menus>
-                <Menu mnemonicParsing="false" text="File">
+                <Menu mnemonicParsing="false" text="Actions">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Close" />
+                    <MenuItem mnemonicParsing="false" text="Add Student" />
+                        <MenuItem mnemonicParsing="false" text="Edit Student" />
+                        <MenuItem mnemonicParsing="false" text="Delete Student" />
                   </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Delete" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
-                  </items>
-                </Menu>
+                  <Menu mnemonicParsing="false" text="About">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="What is this?" />
+                        <MenuItem mnemonicParsing="false" text="Version" />
+                     </items>
+                  </Menu>
               </menus>
             </MenuBar>
          </children>

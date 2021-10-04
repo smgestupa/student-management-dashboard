@@ -546,7 +546,7 @@
                                  </font></Button>
                            </children>
                         </Pane>
-                        <Pane prefHeight="101.0" prefWidth="316.0" />
+                        <Pane prefHeight="101.0" prefWidth="337.0" />
                         <Pane prefHeight="101.0" prefWidth="262.0" HBox.hgrow="ALWAYS">
                            <children>
                               <ComboBox fx:id="sortingBox" layoutX="86.0" layoutY="49.0" onAction="#sortStudents" prefHeight="33.0" prefWidth="150.0" />
@@ -605,21 +605,19 @@
             </HBox>
             <MenuBar>
               <menus>
-                <Menu mnemonicParsing="false" text="File">
+                <Menu mnemonicParsing="false" text="Actions">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Close" />
+                    <MenuItem mnemonicParsing="false" text="Add Student" />
+                        <MenuItem mnemonicParsing="false" text="Edit Student" />
+                        <MenuItem mnemonicParsing="false" text="Delete Student" />
                   </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Delete" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
-                  </items>
-                </Menu>
+                  <Menu mnemonicParsing="false" text="About">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="What is this?" />
+                        <MenuItem mnemonicParsing="false" text="Version" />
+                     </items>
+                  </Menu>
               </menus>
             </MenuBar>
          </children>
