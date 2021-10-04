@@ -1,13 +1,23 @@
 .student-entry {
     -fx-text-fill: white;
-    -fx-background-color: #2f3136;
+    -fx-background-color: #282a2e;
     -fx-background-radius: 8px;
     -fx-cursor: hand;
 }
 
 .student-entry:hover {
+    -fx-scale-x: 105%;
+    -fx-scale-y: 105%;
     -fx-text-fill: white;
-    -fx-background-color: #33353b;
+    -fx-background-color: #212326;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+
+.student-entry:pressed {
+    -fx-scale-x: 115%;
+    -fx-scale-y: 115%;
+    -fx-background-color: #212326;
     -fx-background-radius: 8px;
     -fx-cursor: hand;
 }

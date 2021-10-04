@@ -22,6 +22,16 @@
    <top>
       <HBox alignment="CENTER_RIGHT" onMouseDragged="#onDraggedMouse" onMousePressed="#onClickedMouse" prefHeight="27.0" prefWidth="1280.0" style="-fx-background-color: #202225;" BorderPane.alignment="CENTER">
          <children>
+            <Pane prefHeight="27.0" prefWidth="315.0">
+               <children>
+                  <Label layoutX="10.0" layoutY="3.0" text="Student Management Dashboard" textFill="#72767d">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
             <Button mnemonicParsing="false" onMouseClicked="#minimizeProgram" styleClass="minimize-button" stylesheets="@../styles/buttons.css" text="—" textFill="WHITE">
                <font>
                   <Font size="13.0" />
@@ -38,13 +48,13 @@
    <left>
       <VBox alignment="TOP_CENTER" prefHeight="693.0" prefWidth="284.0" style="-fx-background-color: #202225;" BorderPane.alignment="CENTER">
          <children>
-            <Pane prefHeight="116.0" prefWidth="284.0" />
-            <Label text="CHANGE THIS TO A PREFERRED TITLE" textAlignment="CENTER" textFill="WHITE" wrapText="true">
-               <font>
-                  <Font name="System Bold" size="25.0" />
-               </font>
-            </Label>
-            <Pane prefHeight="55.0" prefWidth="284.0" />
+            <Pane prefHeight="47.0" prefWidth="284.0" />
+            <ImageView fitHeight="147.0" fitWidth="147.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/icons/dashboard-icon.png" />
+               </image>
+            </ImageView>
+            <Pane prefHeight="59.0" prefWidth="284.0" />
             <Button fx:id="addButton" mnemonicParsing="false" onMouseClicked="#openAddStudentPane" prefHeight="86.0" prefWidth="284.0" stylesheets="@../styles/buttons.css">
                <graphic>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -545,7 +555,7 @@
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="101.0" prefWidth="996.0">
                      <children>
-                        <Pane prefHeight="101.0" prefWidth="627.0">
+                        <Pane prefHeight="101.0" prefWidth="432.0">
                            <children>
                               <TextField fx:id="searchField" layoutX="14.0" layoutY="49.0" prefHeight="33.0" prefWidth="279.0" promptText="Type here a keyword..." />
                               <Label layoutX="14.0" layoutY="14.0" text="Search Student" textFill="WHITE" wrapText="true">
@@ -557,8 +567,13 @@
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font></Button>
-                              <ComboBox fx:id="sortingBox" layoutX="391.0" layoutY="49.0" onAction="#sortStudents" prefHeight="33.0" prefWidth="150.0" />
-                              <Label layoutX="391.0" layoutY="14.0" text="Sort by" textFill="WHITE" wrapText="true">
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="101.0" prefWidth="316.0" />
+                        <Pane prefHeight="101.0" prefWidth="262.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <ComboBox fx:id="sortingBox" layoutX="86.0" layoutY="49.0" onAction="#sortStudents" prefHeight="33.0" prefWidth="150.0" />
+                              <Label layoutX="14.0" layoutY="49.0" text="Sort by" textFill="WHITE" wrapText="true">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
