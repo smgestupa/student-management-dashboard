@@ -371,9 +371,10 @@ public class CrudRedesignController implements Initializable  {
         try {
             read = new BufferedReader( new FileReader( "database/students-list.txt" ) );
 
+            String pattern = searchField.getText().replaceAll( " {1,}", "|" );
             String s;
             while ( ( s = read.readLine() ) != null ) {
-                if ( !Pattern.compile( searchField.getText(), Pattern.CASE_INSENSITIVE ).matcher( s ).find() ) continue;
+                if ( !Pattern.compile( pattern, Pattern.CASE_INSENSITIVE ).matcher( s ).find() ) continue;
 
                 String[] entry = s.split( "&" );
                 students.add( new Student( Integer.parseInt( entry[0] ), entry[1], entry[2], Integer.parseInt( entry[3] ), Integer.parseInt( entry[4] ), entry[5], entry[6] ) );
@@ -388,8 +389,10 @@ public class CrudRedesignController implements Initializable  {
     }
 
     @FXML
-    void sortStudents() throws IOException {
-        searchStudents();
+    void sortStudents() {
+        List< Student > currentList = new ArrayList<>();
+        currentList.addAll( students );
+        addStudents( currentList );
     }
 
     @FXML
