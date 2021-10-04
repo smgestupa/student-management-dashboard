@@ -560,18 +560,27 @@
                         </Pane>
                      </children>
                   </HBox>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0" stylesheets="@../styles/styles.css" VBox.vgrow="SOMETIMES">
-                     <content>
-                        <GridPane fx:id="grid" alignment="TOP_CENTER" prefHeight="15.0" prefWidth="41.0">
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                        </GridPane>
-                     </content>
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="20.0" right="10.0" />
-                     </VBox.margin>
-                  </ScrollPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <ScrollPane prefHeight="200.0" prefWidth="200.0" stylesheets="@../styles/styles.css">
+                           <content>
+                              <GridPane fx:id="grid" alignment="TOP_CENTER" prefHeight="15.0" prefWidth="41.0">
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                              </GridPane>
+                           </content>
+                           <StackPane.margin>
+                              <Insets bottom="10.0" left="20.0" right="10.0" />
+                           </StackPane.margin>
+                        </ScrollPane>
+                        <ImageView fx:id="viewSign" fitHeight="115.0" fitWidth="115.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/no-entry-found.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </StackPane>
                </children>
             </VBox>
          </children>
