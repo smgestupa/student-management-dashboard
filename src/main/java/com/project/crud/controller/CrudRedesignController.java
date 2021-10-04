@@ -4,7 +4,6 @@ import com.project.crud.listener.Listen;
 import com.project.crud.model.Student;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -204,12 +203,21 @@ public class CrudRedesignController implements Initializable  {
                     Alert alert = new Alert( Alert.AlertType.INFORMATION );
                     alert.setTitle( "Success!" );
                     alert.setHeaderText( "You have successfully added a student." );
+
+                    DialogPane dialog = alert.getDialogPane();
+                    dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+                    dialog.getStyleClass().add( "dialog" );
+
                     alert.showAndWait();
                 } else {
                     Alert alert = new Alert( Alert.AlertType.WARNING );
                     alert.setTitle( "Warning!" );
                     alert.setHeaderText( "A duplicate entry has been found." );
                     alert.setContentText( "You should edit the entry instead." );
+
+                    DialogPane dialog = alert.getDialogPane();
+                    dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+                    dialog.getStyleClass().add( "dialog" );
 
                     alert.showAndWait();
                 }
@@ -219,12 +227,20 @@ public class CrudRedesignController implements Initializable  {
                 alert.setHeaderText( "The Student ID must be a number." );
                 alert.setContentText( "Please try again." );
 
+                DialogPane dialog = alert.getDialogPane();
+                dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+                dialog.getStyleClass().add( "dialog" );
+
                 alert.showAndWait();
             } else {
                 Alert alert = new Alert( Alert.AlertType.WARNING );
                 alert.setTitle( "Warning!" );
                 alert.setHeaderText( "The student's age must be a number." );
                 alert.setContentText( "Please try again." );
+
+                DialogPane dialog = alert.getDialogPane();
+                dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+                dialog.getStyleClass().add( "dialog" );
 
                 alert.showAndWait();
             }
@@ -233,6 +249,10 @@ public class CrudRedesignController implements Initializable  {
             alert.setTitle( "Warning!" );
             alert.setHeaderText( "You must fill up everything before adding an entry." );
             alert.setContentText( "Please try again." );
+
+            DialogPane dialog = alert.getDialogPane();
+            dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+            dialog.getStyleClass().add( "dialog" );
 
             alert.showAndWait();
         }
@@ -263,6 +283,7 @@ public class CrudRedesignController implements Initializable  {
 
     @FXML
     void editStudent() throws IOException {
+        boolean success = false;
         try {
             read = new BufferedReader( new FileReader( "database/students-list.txt" ) );
             StringBuffer fileContent = new StringBuffer();
@@ -294,18 +315,16 @@ public class CrudRedesignController implements Initializable  {
                 write = new BufferedWriter( new FileWriter( "database/students-list.txt" ) );
                 write.write( fileContent.toString() );
 
-                addStudents( getStudents() );
-                closePane();
-
-                Alert alert = new Alert( Alert.AlertType.INFORMATION );
-                alert.setTitle( "Success!" );
-                alert.setHeaderText( "You have successfully edited a student entry." );
-                alert.showAndWait();
+                success = true;
             } else if ( !studentIdIsNumber ) {
                 Alert alert = new Alert( Alert.AlertType.WARNING );
                 alert.setTitle( "Warning!" );
                 alert.setHeaderText( "The Student ID must be a number." );
                 alert.setContentText( "Please try again." );
+
+                DialogPane dialog = alert.getDialogPane();
+                dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+                dialog.getStyleClass().add( "dialog" );
 
                 alert.showAndWait();
             } else {
@@ -314,6 +333,10 @@ public class CrudRedesignController implements Initializable  {
                 alert.setHeaderText( "The student's age must be a number." );
                 alert.setContentText( "Please try again." );
 
+                DialogPane dialog = alert.getDialogPane();
+                dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+                dialog.getStyleClass().add( "dialog" );
+
                 alert.showAndWait();
             }
         } catch ( IOException err ) {
@@ -321,14 +344,35 @@ public class CrudRedesignController implements Initializable  {
         } finally {
             if ( read != null ) read.close();
             if ( write != null ) write.close();
+
+            if ( success ) {
+                addStudents( getStudents() );
+                closePane();
+
+                Alert alert = new Alert( Alert.AlertType.INFORMATION );
+                alert.setTitle( "Success!" );
+                alert.setHeaderText( "You have successfully edited a student entry." );
+
+                DialogPane dialog = alert.getDialogPane();
+                dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+                dialog.getStyleClass().add( "dialog" );
+
+                alert.showAndWait();
+            }
         }
     }
 
     @FXML
     void confirmDeleteStudent() throws IOException {
+        boolean success = false;
+
         Alert confirm = new Alert( Alert.AlertType.CONFIRMATION );
         confirm.setTitle( "Confirmation Required" );
         confirm.setHeaderText( "Would you like to delete " + selectedStudent.getFirstName() + "'s entry?" );
+
+        DialogPane dialog = confirm.getDialogPane();
+        dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+        dialog.getStyleClass().add( "dialog" );
 
         Optional< ButtonType > result = confirm.showAndWait();
         if ( result.get() == ButtonType.OK) {
@@ -346,20 +390,29 @@ public class CrudRedesignController implements Initializable  {
 
                 write = new BufferedWriter( new FileWriter( "database/students-list.txt" ) );
                 write.write( newFileContent.toString() );
-                selectedStudent = null;
 
-                addStudents( getStudents() );
-                closePane();
-
-                Alert alert = new Alert( Alert.AlertType.INFORMATION );
-                alert.setTitle( "Success!" );
-                alert.setHeaderText( "You have successfully deleted a student entry." );
-                alert.showAndWait();
+                success = true;
             } catch ( IOException err ) {
                 System.err.println( "Warning! IOException has occurred at confirmDeleteStudent() function: " + err.getMessage() );
             } finally {
                 if ( read != null ) read.close();
                 if ( write != null ) write.close();
+
+                if ( success ) {
+                    addStudents( getStudents() );
+                    closePane();
+                    selectedStudent = null;
+
+                    Alert alert = new Alert( Alert.AlertType.INFORMATION );
+                    alert.setTitle( "Success!" );
+                    alert.setHeaderText( "You have successfully deleted a student entry." );
+
+                    DialogPane dialogSuccess = alert.getDialogPane();
+                    dialogSuccess.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+                    dialogSuccess.getStyleClass().add( "dialog" );
+
+                    alert.showAndWait();
+                }
             }
         }
     }
@@ -371,9 +424,10 @@ public class CrudRedesignController implements Initializable  {
         try {
             read = new BufferedReader( new FileReader( "database/students-list.txt" ) );
 
+            String pattern = searchField.getText().replaceAll( " {1,}", "|" );
             String s;
             while ( ( s = read.readLine() ) != null ) {
-                if ( !Pattern.compile( searchField.getText(), Pattern.CASE_INSENSITIVE ).matcher( s ).find() ) continue;
+                if ( !Pattern.compile( pattern, Pattern.CASE_INSENSITIVE ).matcher( s ).find() ) continue;
 
                 String[] entry = s.split( "&" );
                 students.add( new Student( Integer.parseInt( entry[0] ), entry[1], entry[2], Integer.parseInt( entry[3] ), Integer.parseInt( entry[4] ), entry[5], entry[6] ) );
@@ -389,7 +443,9 @@ public class CrudRedesignController implements Initializable  {
 
     @FXML
     void sortStudents() throws IOException {
-        searchStudents();
+        List< Student > currentList = new ArrayList<>();
+        currentList.addAll( students );
+        addStudents( currentList );
     }
 
     @FXML
@@ -441,13 +497,17 @@ public class CrudRedesignController implements Initializable  {
             editFirstNameField.setText( selectedStudent.getFirstName() );
             editLastNameField.setText( selectedStudent.getLastName() );
             editYearLevelBox.getSelectionModel().select( String.valueOf( selectedStudent.getYearLevel() ) );
-            editAgeField.setText( String.valueOf(  selectedStudent.getAge() ) );
+            editAgeField.setText( String.valueOf( selectedStudent.getAge() ) );
             editGenderBox.getSelectionModel().select( selectedStudent.getGender() );
             editProgramBox.getSelectionModel().select( selectedStudent.getProgram() );
         } else {
             Alert alert = new Alert( Alert.AlertType.WARNING );
             alert.setTitle( "Warning!" );
             alert.setHeaderText( "You must choose a student first before opening the editing interface." );
+
+            DialogPane dialog = alert.getDialogPane();
+            dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+            dialog.getStyleClass().add( "dialog" );
 
             alert.showAndWait();
         }
@@ -478,6 +538,10 @@ public class CrudRedesignController implements Initializable  {
             alert.setTitle( "Warning!" );
             alert.setHeaderText( "You must choose a student first before opening the delete interface." );
 
+            DialogPane dialog = alert.getDialogPane();
+            dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+            dialog.getStyleClass().add( "dialog" );
+
             alert.showAndWait();
         }
     }
@@ -500,6 +564,10 @@ public class CrudRedesignController implements Initializable  {
         confirm.setTitle( "Confirmation Required" );
         confirm.setHeaderText( "You are about to close the program.");
 
+        DialogPane dialog = confirm.getDialogPane();
+        dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+        dialog.getStyleClass().add( "dialog" );
+
         Optional< ButtonType > result = confirm.showAndWait();
         if ( result.get() == ButtonType.OK ) {
             System.exit( 0 );
@@ -521,4 +589,72 @@ public class CrudRedesignController implements Initializable  {
         }
     }
 
+    @FXML
+    void addStudentHelp() {
+        Alert info = new Alert( Alert.AlertType.INFORMATION );
+        info.setTitle( "Add a Student" );
+        info.setHeaderText( "Adding a student is easy,");
+        info.setContentText( "Simply click on the \"Add a Student\" button on the left side or press CTRL + A in your keyboard." );
+
+        DialogPane dialog = info.getDialogPane();
+        dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+        dialog.getStyleClass().add( "dialog" );
+
+        info.showAndWait();
+    }
+
+    @FXML
+    void editStudentHelp() {
+        Alert info = new Alert( Alert.AlertType.INFORMATION );
+        info.setTitle( "Edit a Student" );
+        info.setHeaderText( "Before editing a student,");
+        info.setContentText( "You must click on a student first and simply click on the \"Edit a Student\" button on the left side or press CTRL + E in your keyboard." );
+
+        DialogPane dialog = info.getDialogPane();
+        dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+        dialog.getStyleClass().add( "dialog" );
+
+        info.showAndWait();
+    }
+
+    @FXML
+    void deleteStudentHelp() {
+        Alert info = new Alert( Alert.AlertType.INFORMATION );
+        info.setTitle( "Delete a Student" );
+        info.setHeaderText( "Before deleting a student,");
+        info.setContentText( "You must click on a student first and simply click on the \"Delete a Student\" button on the left side or press CTRL + D in your keyboard." );
+
+        DialogPane dialog = info.getDialogPane();
+        dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+        dialog.getStyleClass().add( "dialog" );
+
+        info.showAndWait();
+    }
+
+    @FXML
+    void whatIsThis() {
+        Alert info = new Alert( Alert.AlertType.INFORMATION );
+        info.setTitle( "What is this?" );
+        info.setHeaderText( "This is a dashboard application, made in JavaFX that allows you to easily manage student information.");
+
+        DialogPane dialog = info.getDialogPane();
+        dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+        dialog.getStyleClass().add( "dialog" );
+
+        info.showAndWait();
+    }
+
+    @FXML
+    void programVersion() {
+        Alert info = new Alert( Alert.AlertType.INFORMATION );
+        info.setTitle( "Program Version" );
+        info.setHeaderText( "Version 1.0 – Revision 2");
+        info.setContentText( "Made by Team Positive.");
+
+        DialogPane dialog = info.getDialogPane();
+        dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+        dialog.getStyleClass().add( "dialog" );
+
+        info.showAndWait();
+    }
 }
