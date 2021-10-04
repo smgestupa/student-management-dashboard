@@ -590,11 +590,52 @@ public class CrudRedesignController implements Initializable  {
     }
 
     @FXML
+    void addStudentHelp() {
+        Alert info = new Alert( Alert.AlertType.INFORMATION );
+        info.setTitle( "Add a Student" );
+        info.setHeaderText( "Adding a student is easy,");
+        info.setContentText( "Simply click on the \"Add a Student\" button on the left side or press CTRL + A in your keyboard." );
+
+        DialogPane dialog = info.getDialogPane();
+        dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+        dialog.getStyleClass().add( "dialog" );
+
+        info.showAndWait();
+    }
+
+    @FXML
+    void editStudentHelp() {
+        Alert info = new Alert( Alert.AlertType.INFORMATION );
+        info.setTitle( "Edit a Student" );
+        info.setHeaderText( "Before editing a student,");
+        info.setContentText( "You must click on a student first and simply click on the \"Edit a Student\" button on the left side or press CTRL + E in your keyboard." );
+
+        DialogPane dialog = info.getDialogPane();
+        dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+        dialog.getStyleClass().add( "dialog" );
+
+        info.showAndWait();
+    }
+
+    @FXML
+    void deleteStudentHelp() {
+        Alert info = new Alert( Alert.AlertType.INFORMATION );
+        info.setTitle( "Delete a Student" );
+        info.setHeaderText( "Before deleting a student,");
+        info.setContentText( "You must click on a student first and simply click on the \"Delete a Student\" button on the left side or press CTRL + D in your keyboard." );
+
+        DialogPane dialog = info.getDialogPane();
+        dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+        dialog.getStyleClass().add( "dialog" );
+
+        info.showAndWait();
+    }
+
+    @FXML
     void whatIsThis() {
         Alert info = new Alert( Alert.AlertType.INFORMATION );
         info.setTitle( "What is this?" );
-        info.setHeaderText( "Student Management Dashboard");
-        info.setContentText( "This is a dashboard application, made in JavaFX that allows you to easily manage student information.");
+        info.setHeaderText( "This is a dashboard application, made in JavaFX that allows you to easily manage student information.");
 
         DialogPane dialog = info.getDialogPane();
         dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );

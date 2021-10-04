@@ -622,6 +622,13 @@
                            </accelerator></MenuItem>
                   </items>
                 </Menu>
+                  <Menu mnemonicParsing="false" text="Help">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#addStudentHelp" text="Adding a Student" />
+                        <MenuItem mnemonicParsing="false" onAction="#editStudentHelp" text="Editing a Student" />
+                        <MenuItem mnemonicParsing="false" onAction="#deleteStudentHelp" text="Deleting a Student" />
+                     </items>
+                  </Menu>
                   <Menu mnemonicParsing="false" text="About">
                      <items>
                         <MenuItem mnemonicParsing="false" onAction="#whatIsThis" text="What is this?" />
