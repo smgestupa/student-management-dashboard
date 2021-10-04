@@ -33,6 +33,7 @@
    -fx-background-color: #40444b;
    -fx-border-color: #272a2e;
    -fx-border-width: 1;
+   -fx-cursor: hand;
 }
 
 .combo-box .cell {
@@ -42,4 +43,37 @@
 
 .combo-box .cell:hover {
    -fx-background-color: #34373c;
+   -fx-cursor: hand;
+}
+
+.dialog {
+   -fx-background-color: #36393f;
+ }
+
+ .dialog > *.content.label {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+  }
+
+ .dialog:header *.header-panel {
+   -fx-background-color: #202225;
+ }
+
+ .dialog:header *.header-panel *.label {
+    -fx-text-fill: white;
+ }
+
+ .dialog > *.button-bar *.button {
+   -fx-text-fill: white;
+   -fx-background-color: #40444b;
+   -fx-border-color: #272a2e;
+   -fx-border-width: 1;
+   -fx-border-radius: 8px;
+   -fx-background-radius: 8px;
+  }
+
+.dialog > *.button-bar:hover *.button:hover {
+   -fx-text-fill: white;
+   -fx-background-color: #34373c;
+   -fx-cursor: hand;
 }

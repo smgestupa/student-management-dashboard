@@ -4,7 +4,6 @@ import com.project.crud.listener.Listen;
 import com.project.crud.model.Student;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -204,12 +203,21 @@ public class CrudRedesignController implements Initializable  {
                     Alert alert = new Alert( Alert.AlertType.INFORMATION );
                     alert.setTitle( "Success!" );
                     alert.setHeaderText( "You have successfully added a student." );
+
+                    DialogPane dialog = alert.getDialogPane();
+                    dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+                    dialog.getStyleClass().add( "dialog" );
+
                     alert.showAndWait();
                 } else {
                     Alert alert = new Alert( Alert.AlertType.WARNING );
                     alert.setTitle( "Warning!" );
                     alert.setHeaderText( "A duplicate entry has been found." );
                     alert.setContentText( "You should edit the entry instead." );
+
+                    DialogPane dialog = alert.getDialogPane();
+                    dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+                    dialog.getStyleClass().add( "dialog" );
 
                     alert.showAndWait();
                 }
@@ -219,12 +227,20 @@ public class CrudRedesignController implements Initializable  {
                 alert.setHeaderText( "The Student ID must be a number." );
                 alert.setContentText( "Please try again." );
 
+                DialogPane dialog = alert.getDialogPane();
+                dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+                dialog.getStyleClass().add( "dialog" );
+
                 alert.showAndWait();
             } else {
                 Alert alert = new Alert( Alert.AlertType.WARNING );
                 alert.setTitle( "Warning!" );
                 alert.setHeaderText( "The student's age must be a number." );
                 alert.setContentText( "Please try again." );
+
+                DialogPane dialog = alert.getDialogPane();
+                dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+                dialog.getStyleClass().add( "dialog" );
 
                 alert.showAndWait();
             }
@@ -233,6 +249,10 @@ public class CrudRedesignController implements Initializable  {
             alert.setTitle( "Warning!" );
             alert.setHeaderText( "You must fill up everything before adding an entry." );
             alert.setContentText( "Please try again." );
+
+            DialogPane dialog = alert.getDialogPane();
+            dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+            dialog.getStyleClass().add( "dialog" );
 
             alert.showAndWait();
         }
@@ -300,6 +320,11 @@ public class CrudRedesignController implements Initializable  {
                 Alert alert = new Alert( Alert.AlertType.INFORMATION );
                 alert.setTitle( "Success!" );
                 alert.setHeaderText( "You have successfully edited a student entry." );
+
+                DialogPane dialog = alert.getDialogPane();
+                dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+                dialog.getStyleClass().add( "dialog" );
+
                 alert.showAndWait();
             } else if ( !studentIdIsNumber ) {
                 Alert alert = new Alert( Alert.AlertType.WARNING );
@@ -307,12 +332,20 @@ public class CrudRedesignController implements Initializable  {
                 alert.setHeaderText( "The Student ID must be a number." );
                 alert.setContentText( "Please try again." );
 
+                DialogPane dialog = alert.getDialogPane();
+                dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+                dialog.getStyleClass().add( "dialog" );
+
                 alert.showAndWait();
             } else {
                 Alert alert = new Alert( Alert.AlertType.WARNING );
                 alert.setTitle( "Warning!" );
                 alert.setHeaderText( "The student's age must be a number." );
                 alert.setContentText( "Please try again." );
+
+                DialogPane dialog = alert.getDialogPane();
+                dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+                dialog.getStyleClass().add( "dialog" );
 
                 alert.showAndWait();
             }
@@ -354,6 +387,11 @@ public class CrudRedesignController implements Initializable  {
                 Alert alert = new Alert( Alert.AlertType.INFORMATION );
                 alert.setTitle( "Success!" );
                 alert.setHeaderText( "You have successfully deleted a student entry." );
+
+                DialogPane dialog = alert.getDialogPane();
+                dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+                dialog.getStyleClass().add( "dialog" );
+
                 alert.showAndWait();
             } catch ( IOException err ) {
                 System.err.println( "Warning! IOException has occurred at confirmDeleteStudent() function: " + err.getMessage() );
@@ -452,6 +490,10 @@ public class CrudRedesignController implements Initializable  {
             alert.setTitle( "Warning!" );
             alert.setHeaderText( "You must choose a student first before opening the editing interface." );
 
+            DialogPane dialog = alert.getDialogPane();
+            dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+            dialog.getStyleClass().add( "dialog" );
+
             alert.showAndWait();
         }
     }
@@ -481,6 +523,10 @@ public class CrudRedesignController implements Initializable  {
             alert.setTitle( "Warning!" );
             alert.setHeaderText( "You must choose a student first before opening the delete interface." );
 
+            DialogPane dialog = alert.getDialogPane();
+            dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+            dialog.getStyleClass().add( "dialog" );
+
             alert.showAndWait();
         }
     }
@@ -502,6 +548,10 @@ public class CrudRedesignController implements Initializable  {
         Alert confirm = new Alert( Alert.AlertType.CONFIRMATION );
         confirm.setTitle( "Confirmation Required" );
         confirm.setHeaderText( "You are about to close the program.");
+
+        DialogPane dialog = confirm.getDialogPane();
+        dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+        dialog.getStyleClass().add( "dialog" );
 
         Optional< ButtonType > result = confirm.showAndWait();
         if ( result.get() == ButtonType.OK ) {
