@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -99,6 +100,320 @@
    <center>
       <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
+            <HBox fx:id="deleteStudentPane" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <VBox alignment="TOP_CENTER" prefHeight="666.0" prefWidth="406.0" style="-fx-background-color: #2f3136;">
+                     <children>
+                        <Pane prefHeight="7.0" prefWidth="455.0" />
+                        <Label text="DELETE A STUDENT" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="25.0" />
+                           </font>
+                        </Label>
+                        <Pane prefHeight="15.0" prefWidth="455.0" />
+                        <Pane prefHeight="80.0" prefWidth="455.0">
+                           <children>
+                              <Label layoutX="50.0" layoutY="9.0" text="Student ID" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="deleteStudentIdText" layoutX="50.0" layoutY="44.0" text="student_id" textFill="WHITE">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="105.0" prefWidth="420.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <ImageView fx:id="deleteStudentImage" fitHeight="141.0" fitWidth="141.0" layoutX="133.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="65.0" prefWidth="455.0">
+                           <children>
+                              <Label layoutX="235.0" layoutY="3.0" text="Last Name" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="26.0" layoutY="1.0" text="First Name" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="deleteFirstNameText" layoutX="26.0" layoutY="38.0" text="first_name" textFill="WHITE">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="deleteLastNameText" layoutX="235.0" layoutY="38.0" text="last_name" textFill="WHITE">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="65.0" prefWidth="455.0">
+                           <children>
+                              <Label layoutX="26.0" layoutY="2.0" text="Age" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="deleteAgeText" layoutX="26.0" layoutY="37.0" text="age" textFill="WHITE">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="65.0" prefWidth="455.0">
+                           <children>
+                              <Label layoutX="26.0" layoutY="2.0" text="Year Level" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="235.0" layoutY="1.0" text="Gender" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="deleteYearLevelText" layoutX="26.0" layoutY="37.0" text="year_level" textFill="WHITE">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="deleteGenderText" layoutX="235.0" layoutY="38.0" text="gender" textFill="WHITE">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="65.0" prefWidth="455.0">
+                           <children>
+                              <Label layoutX="26.0" layoutY="2.0" text="Program" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="deleteProgramText" layoutX="26.0" layoutY="37.0" text="program" textFill="WHITE">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="37.0" prefWidth="420.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <Button fx:id="addStudentEntry2" layoutX="198.0" layoutY="27.0" mnemonicParsing="false" onMouseClicked="#confirmDeleteStudent" prefHeight="46.0" prefWidth="194.0" style="-fx-font-weight: bold;" styleClass="delete-button" stylesheets="@../styles/buttons.css" text="Delete Student" textFill="WHITE">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </Pane>
+                     </children>
+                  </VBox>
+                  <Pane onMouseClicked="#closePane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #2f3136; -fx-opacity: 0.25;" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox fx:id="editStudentPane" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <VBox alignment="TOP_CENTER" prefHeight="666.0" prefWidth="406.0" style="-fx-background-color: #2f3136;">
+                     <children>
+                        <Pane prefHeight="7.0" prefWidth="455.0" />
+                        <Label text="EDIT A STUDENT" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="25.0" />
+                           </font>
+                        </Label>
+                        <Pane prefHeight="15.0" prefWidth="455.0" />
+                        <Pane prefHeight="80.0" prefWidth="455.0">
+                           <children>
+                              <TextField fx:id="editStudentIdField" layoutX="50.0" layoutY="44.0" prefHeight="25.0" prefWidth="300.0" promptText="e.g. 00000000" />
+                              <Label layoutX="50.0" layoutY="9.0" text="Student ID" textFill="WHITE">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="105.0" prefWidth="420.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <ImageView fx:id="editStudentImage" fitHeight="141.0" fitWidth="141.0" layoutX="133.0" layoutY="14.0" onMouseClicked="#editImage" pickOnBounds="true" preserveRatio="true">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="65.0" prefWidth="455.0">
+                           <children>
+                              <TextField fx:id="editLastNameField" layoutX="235.0" layoutY="38.0" prefHeight="27.0" prefWidth="160.0" promptText="e.g. Doe" />
+                              <Label layoutX="235.0" layoutY="3.0" text="Last Name" textFill="WHITE">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="editFirstNameField" layoutX="26.0" layoutY="36.0" prefHeight="25.0" prefWidth="160.0" promptText="e.g. John" />
+                              <Label layoutX="26.0" layoutY="1.0" text="First Name" textFill="WHITE">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="65.0" prefWidth="455.0">
+                           <children>
+                              <TextField fx:id="editAgeField" layoutX="26.0" layoutY="37.0" prefHeight="27.0" prefWidth="95.0" promptText="e.g. 19" />
+                              <Label layoutX="26.0" layoutY="2.0" text="Age" textFill="WHITE">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="65.0" prefWidth="455.0">
+                           <children>
+                              <Label layoutX="26.0" layoutY="2.0" text="Year Level" textFill="WHITE">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <ComboBox fx:id="editYearLevelBox" layoutX="26.0" layoutY="37.0" prefHeight="25.0" prefWidth="160.0" />
+                              <Label layoutX="235.0" layoutY="1.0" text="Gender" textFill="WHITE">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <ComboBox fx:id="editGenderBox" layoutX="235.0" layoutY="36.0" prefHeight="25.0" prefWidth="160.0" />
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="65.0" prefWidth="455.0">
+                           <children>
+                              <Label layoutX="26.0" layoutY="2.0" text="Program" textFill="WHITE">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <ComboBox fx:id="editProgramBox" layoutX="26.0" layoutY="37.0" prefHeight="27.0" prefWidth="368.0" />
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="37.0" prefWidth="420.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <Button fx:id="addStudentEntry1" layoutX="198.0" layoutY="27.0" mnemonicParsing="false" onMouseClicked="#editStudent" prefHeight="46.0" prefWidth="194.0" style="-fx-font-weight: bold;" styleClass="default-button" stylesheets="@../styles/buttons.css" text="Update Student" textFill="WHITE">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </Pane>
+                     </children>
+                  </VBox>
+                  <Pane onMouseClicked="#closePane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #2f3136; -fx-opacity: 0.25;" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox fx:id="addStudentPane" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <VBox alignment="TOP_CENTER" prefHeight="666.0" prefWidth="406.0" style="-fx-background-color: #2f3136;">
+                     <children>
+                        <Pane prefHeight="7.0" prefWidth="455.0" />
+                        <Label text="ADD A STUDENT" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="25.0" />
+                           </font>
+                        </Label>
+                        <Pane prefHeight="15.0" prefWidth="455.0" />
+                        <Pane prefHeight="80.0" prefWidth="455.0">
+                           <children>
+                              <TextField fx:id="studentIdField" layoutX="50.0" layoutY="44.0" prefHeight="25.0" prefWidth="300.0" promptText="e.g. 00000000" />
+                              <Label layoutX="50.0" layoutY="9.0" text="Student ID" textFill="WHITE">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="105.0" prefWidth="420.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <ImageView fx:id="addStudentImage" fitHeight="141.0" fitWidth="141.0" layoutX="133.0" layoutY="14.0" onMouseClicked="#addImage" pickOnBounds="true" preserveRatio="true">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                           </children></Pane>
+                        <Pane prefHeight="65.0" prefWidth="455.0">
+                           <children>
+                              <TextField fx:id="lastNameField" layoutX="235.0" layoutY="38.0" prefHeight="27.0" prefWidth="160.0" promptText="e.g. Doe" />
+                              <Label layoutX="235.0" layoutY="3.0" text="Last Name" textFill="WHITE">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="firstNameField" layoutX="26.0" layoutY="36.0" prefHeight="25.0" prefWidth="160.0" promptText="e.g. John" />
+                              <Label layoutX="26.0" layoutY="1.0" text="First Name" textFill="WHITE">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="65.0" prefWidth="455.0">
+                           <children>
+                              <TextField fx:id="ageField" layoutX="26.0" layoutY="37.0" prefHeight="27.0" prefWidth="95.0" promptText="e.g. 19" />
+                              <Label layoutX="26.0" layoutY="2.0" text="Age" textFill="WHITE">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="65.0" prefWidth="455.0">
+                           <children>
+                              <Label layoutX="26.0" layoutY="2.0" text="Year Level" textFill="WHITE">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <ComboBox fx:id="yearLevelBox" layoutX="26.0" layoutY="37.0" prefHeight="25.0" prefWidth="160.0" />
+                              <Label layoutX="235.0" layoutY="1.0" text="Gender" textFill="WHITE">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <ComboBox fx:id="genderBox" layoutX="235.0" layoutY="36.0" prefHeight="25.0" prefWidth="160.0" />
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="65.0" prefWidth="455.0">
+                           <children>
+                              <Label layoutX="26.0" layoutY="2.0" text="Program" textFill="WHITE">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <ComboBox fx:id="programBox" layoutX="26.0" layoutY="37.0" prefHeight="27.0" prefWidth="368.0" />
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="37.0" prefWidth="420.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <Button fx:id="addStudentEntry" layoutX="198.0" layoutY="27.0" mnemonicParsing="false" onMouseClicked="#addStudent" prefHeight="46.0" prefWidth="194.0" style="-fx-font-weight: bold;" styleClass="default-button" stylesheets="@../styles/buttons.css" text="Add Student" textFill="WHITE">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </Pane>
+                     </children>
+                  </VBox>
+                  <Pane onMouseClicked="#closePane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #2f3136; -fx-opacity: 0.25;" HBox.hgrow="ALWAYS" />
+               </children></HBox>
             <HBox fx:id="studentInfoPane" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <StackPane prefHeight="150.0" prefWidth="200.0" HBox.hgrow="SOMETIMES">
@@ -215,318 +530,6 @@
                         </VBox>
                      </children>
                   </StackPane>
-               </children>
-            </HBox>
-            <HBox fx:id="addStudentPane" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <VBox alignment="TOP_CENTER" prefHeight="693.0" prefWidth="420.0" style="-fx-background-color: #2f3136;">
-                     <children>
-                        <Pane prefHeight="7.0" prefWidth="455.0" />
-                        <Label text="ADD A STUDENT" textAlignment="CENTER" textFill="WHITE" wrapText="true">
-                           <font>
-                              <Font name="System Bold" size="25.0" />
-                           </font>
-                        </Label>
-                        <Pane prefHeight="15.0" prefWidth="455.0" />
-                        <Pane prefHeight="80.0" prefWidth="455.0">
-                           <children>
-                              <TextField fx:id="studentIdField" layoutX="50.0" layoutY="44.0" prefHeight="25.0" prefWidth="300.0" promptText="e.g. 00000000" />
-                              <Label layoutX="50.0" layoutY="9.0" text="Student ID" textFill="WHITE">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </Pane>
-                        <Pane prefHeight="80.0" prefWidth="455.0">
-                           <children>
-                              <TextField fx:id="firstNameField" layoutX="50.0" layoutY="44.0" prefHeight="25.0" prefWidth="300.0" promptText="e.g. John" />
-                              <Label layoutX="50.0" layoutY="9.0" text="First Name" textFill="WHITE">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </Pane>
-                        <Pane prefHeight="80.0" prefWidth="455.0">
-                           <children>
-                              <TextField fx:id="lastNameField" layoutX="50.0" layoutY="44.0" prefHeight="25.0" prefWidth="300.0" promptText="e.g. Doe" />
-                              <Label layoutX="50.0" layoutY="9.0" text="Last Name" textFill="WHITE">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </Pane>
-                        <Pane prefHeight="80.0" prefWidth="455.0">
-                           <children>
-                              <Label layoutX="50.0" layoutY="9.0" text="Year Level" textFill="WHITE">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </Label>
-                              <ComboBox fx:id="yearLevelBox" layoutX="50.0" layoutY="44.0" prefHeight="25.0" prefWidth="160.0" />
-                           </children>
-                        </Pane>
-                        <Pane prefHeight="80.0" prefWidth="455.0">
-                           <children>
-                              <TextField fx:id="ageField" layoutX="50.0" layoutY="44.0" prefHeight="25.0" prefWidth="300.0" promptText="e.g. 19" />
-                              <Label layoutX="50.0" layoutY="9.0" text="Age" textFill="WHITE">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </Pane>
-                        <Pane prefHeight="80.0" prefWidth="455.0">
-                           <children>
-                              <Label layoutX="50.0" layoutY="9.0" text="Gender" textFill="WHITE">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </Label>
-                              <ComboBox fx:id="genderBox" layoutX="50.0" layoutY="44.0" prefHeight="25.0" prefWidth="160.0" />
-                           </children>
-                        </Pane>
-                        <Pane prefHeight="80.0" prefWidth="455.0">
-                           <children>
-                              <Label layoutX="50.0" layoutY="9.0" text="Program" textFill="WHITE">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </Label>
-                              <ComboBox fx:id="programBox" layoutX="50.0" layoutY="44.0" prefHeight="25.0" prefWidth="351.0" />
-                           </children>
-                        </Pane>
-                        <Pane prefHeight="83.0" prefWidth="420.0" VBox.vgrow="ALWAYS">
-                           <children>
-                              <Button fx:id="addStudentEntry" layoutX="212.0" layoutY="19.0" mnemonicParsing="false" onMouseClicked="#addStudent" prefHeight="46.0" prefWidth="194.0" style="-fx-font-weight: bold;" styleClass="default-button" stylesheets="@../styles/buttons.css" text="Add Student" textFill="WHITE">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </Button>
-                           </children>
-                        </Pane>
-                     </children>
-                  </VBox>
-                  <Pane onMouseClicked="#closePane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #2f3136; -fx-opacity: 0.25;" HBox.hgrow="ALWAYS" />
-               </children></HBox>
-            <HBox fx:id="editStudentPane" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <VBox alignment="TOP_CENTER" prefHeight="693.0" prefWidth="420.0" style="-fx-background-color: #2f3136;">
-                     <children>
-                        <Pane prefHeight="7.0" prefWidth="455.0" />
-                        <Label text="EDIT THE STUDENT" textAlignment="CENTER" textFill="WHITE" wrapText="true">
-                           <font>
-                              <Font name="System Bold" size="25.0" />
-                           </font>
-                        </Label>
-                        <Pane prefHeight="15.0" prefWidth="455.0" />
-                        <Pane prefHeight="80.0" prefWidth="455.0">
-                           <children>
-                              <TextField fx:id="editStudentIdField" layoutX="50.0" layoutY="44.0" prefHeight="25.0" prefWidth="300.0" promptText="e.g. 00000000" />
-                              <Label layoutX="50.0" layoutY="9.0" text="Student ID" textFill="WHITE">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </Pane>
-                        <Pane prefHeight="80.0" prefWidth="455.0">
-                           <children>
-                              <TextField fx:id="editFirstNameField" layoutX="50.0" layoutY="44.0" prefHeight="25.0" prefWidth="300.0" promptText="e.g. John" />
-                              <Label layoutX="50.0" layoutY="9.0" text="First Name" textFill="WHITE">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </Pane>
-                        <Pane prefHeight="80.0" prefWidth="455.0">
-                           <children>
-                              <TextField fx:id="editLastNameField" layoutX="50.0" layoutY="44.0" prefHeight="25.0" prefWidth="300.0" promptText="e.g. Doe" />
-                              <Label layoutX="50.0" layoutY="9.0" text="Last Name" textFill="WHITE">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </Pane>
-                        <Pane prefHeight="80.0" prefWidth="455.0">
-                           <children>
-                              <Label layoutX="50.0" layoutY="9.0" text="Year Level" textFill="WHITE">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </Label>
-                              <ComboBox fx:id="editYearLevelBox" layoutX="50.0" layoutY="44.0" prefHeight="25.0" prefWidth="160.0" />
-                           </children>
-                        </Pane>
-                        <Pane prefHeight="80.0" prefWidth="455.0">
-                           <children>
-                              <TextField fx:id="editAgeField" layoutX="50.0" layoutY="44.0" prefHeight="25.0" prefWidth="300.0" promptText="e.g. 19" />
-                              <Label layoutX="50.0" layoutY="9.0" text="Age" textFill="WHITE">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </Pane>
-                        <Pane prefHeight="80.0" prefWidth="455.0">
-                           <children>
-                              <Label layoutX="50.0" layoutY="9.0" text="Gender" textFill="WHITE">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </Label>
-                              <ComboBox fx:id="editGenderBox" layoutX="50.0" layoutY="44.0" prefHeight="25.0" prefWidth="160.0" />
-                           </children>
-                        </Pane>
-                        <Pane prefHeight="80.0" prefWidth="455.0">
-                           <children>
-                              <Label layoutX="50.0" layoutY="9.0" text="Program" textFill="WHITE">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </Label>
-                              <ComboBox fx:id="editProgramBox" layoutX="50.0" layoutY="44.0" prefHeight="25.0" prefWidth="351.0" />
-                           </children>
-                        </Pane>
-                        <Pane prefHeight="83.0" prefWidth="420.0" VBox.vgrow="ALWAYS">
-                           <children>
-                              <Button fx:id="editStudentEntry" layoutX="212.0" layoutY="19.0" mnemonicParsing="false" onMouseClicked="#editStudent" prefHeight="46.0" prefWidth="194.0" styleClass="default-button" stylesheets="@../styles/buttons.css" text="Update Student">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </Button>
-                           </children>
-                        </Pane>
-                     </children>
-                  </VBox>
-                  <Pane onMouseClicked="#closePane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #2f3136; -fx-opacity: 0.25;" HBox.hgrow="ALWAYS" />
-               </children>
-            </HBox>
-            <HBox fx:id="deleteStudentPane" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <VBox alignment="TOP_CENTER" prefHeight="693.0" prefWidth="420.0" style="-fx-background-color: #2f3136;">
-                     <children>
-                        <Pane prefHeight="7.0" prefWidth="455.0" />
-                        <Label text="DELETE A STUDENT" textAlignment="CENTER" textFill="WHITE" wrapText="true">
-                           <font>
-                              <Font name="System Bold" size="25.0" />
-                           </font>
-                        </Label>
-                        <Pane prefHeight="15.0" prefWidth="420.0" />
-                        <Pane prefHeight="80.0" prefWidth="455.0">
-                           <children>
-                              <Label layoutX="50.0" layoutY="13.0" text="Student ID" textFill="WHITE">
-                                 <font>
-                                    <Font name="System Bold" size="20.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="deleteStudentIdText" layoutX="50.0" layoutY="46.0" text="0000000000" textFill="WHITE">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </Pane>
-                        <Pane prefHeight="80.0" prefWidth="455.0">
-                           <children>
-                              <Label layoutX="50.0" layoutY="13.0" text="First Name" textFill="WHITE">
-                                 <font>
-                                    <Font name="System Bold" size="20.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="deleteFirstNameText" layoutX="50.0" layoutY="46.0" text="fName" textFill="WHITE">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </Pane>
-                        <Pane prefHeight="80.0" prefWidth="455.0">
-                           <children>
-                              <Label layoutX="50.0" layoutY="13.0" text="Last Name" textFill="WHITE">
-                                 <font>
-                                    <Font name="System Bold" size="20.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="deleteLastNameText" layoutX="50.0" layoutY="46.0" text="lName" textFill="WHITE">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </Pane>
-                        <Pane prefHeight="80.0" prefWidth="455.0">
-                           <children>
-                              <Label layoutX="50.0" layoutY="12.0" text="Year Level" textFill="WHITE">
-                                 <font>
-                                    <Font name="System Bold" size="20.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="deleteYearLevelText" layoutX="50.0" layoutY="46.0" text="yLevel" textFill="WHITE">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </Pane>
-                        <Pane prefHeight="80.0" prefWidth="455.0">
-                           <children>
-                              <Label layoutX="50.0" layoutY="8.0" text="Age" textFill="WHITE">
-                                 <font>
-                                    <Font name="System Bold" size="20.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="deleteAgeText" layoutX="50.0" layoutY="42.0" prefHeight="30.0" prefWidth="63.0" text="Age" textFill="WHITE">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </Pane>
-                        <Pane prefHeight="80.0" prefWidth="455.0">
-                           <children>
-                              <Label layoutX="50.0" layoutY="13.0" text="Gender" textFill="WHITE">
-                                 <font>
-                                    <Font name="System Bold" size="20.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="deleteGenderText" layoutX="50.0" layoutY="46.0" text="Gender" textFill="WHITE">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </Pane>
-                        <Pane prefHeight="80.0" prefWidth="455.0">
-                           <children>
-                              <Label layoutX="50.0" layoutY="11.0" text="Program" textFill="WHITE">
-                                 <font>
-                                    <Font name="System Bold" size="20.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="deleteProgramText" layoutX="50.0" layoutY="48.0" text="Program" textFill="WHITE" wrapText="true">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </Pane>
-                        <Pane prefHeight="83.0" prefWidth="420.0" VBox.vgrow="ALWAYS">
-                           <children>
-                              <Button fx:id="deleteStudentButton" layoutX="212.0" layoutY="19.0" mnemonicParsing="false" onMouseClicked="#confirmDeleteStudent" prefHeight="46.0" prefWidth="194.0" styleClass="delete-button" stylesheets="@../styles/buttons.css" text="Delete Student">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </Button>
-                           </children>
-                        </Pane>
-                     </children>
-                  </VBox>
-                  <Pane onMouseClicked="#closePane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #2f3136; -fx-opacity: 0.25;" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
             <VBox fx:id="studentListPane" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #36393f;">
