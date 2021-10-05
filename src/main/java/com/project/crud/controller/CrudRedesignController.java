@@ -5,7 +5,6 @@ import com.project.crud.model.Student;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -78,118 +77,127 @@ public class CrudRedesignController implements Initializable  {
     }
 
     public List< Student > getStudents() throws IOException {
-        List< Student > students = new ArrayList<>();
+        List< Student > studentEntries = new ArrayList<>();
 
-        try {
-            read = new BufferedReader( new FileReader( "database/students-list.txt" ) );
-
-            String s;
-            while ( ( s = read.readLine() ) != null ) {
-                if ( s.trim().isEmpty() ) continue;
-
-                String[] entry = s.split( "&" );
-                students.add( new Student( Integer.parseInt( entry[0] ), entry[1], entry[2], Integer.parseInt( entry[3] ), Integer.parseInt( entry[4] ), entry[5], entry[6] ) );
-            }
-        } catch ( IOException err ) {
-            System.err.println( "Warning! IOException has occurred at getStudents() function: " + err.getMessage() );
-        } finally {
-            if ( read != null ) read.close();
-        }
-
-        return students;
-    }
-
-    public void addStudents( List< Student > studentsList ) {
-        students.clear();
-        students.addAll( studentsList );
-        if ( sortingBox.getSelectionModel().getSelectedIndex() == 1 ) students.sort( Comparator.comparing( Student::getStudentNumber ) );
-            else if ( sortingBox.getSelectionModel().getSelectedIndex() == 2 ) students.sort( Comparator.comparing( Student::getLastName ) );
-        if ( students.size() > 0 ) {
-            listener = new Listen() {
-                @Override
-                public void onClickListener( MouseEvent event, Student student ) {
-                    if ( event.getButton().equals( MouseButton.PRIMARY ) ) {
-                        selectedStudent = student;
-
-                        if ( event.getClickCount() == 2 ) {
-                            infoStudentIdLabel.setText( String.valueOf( student.getStudentNumber() ) );
-                            infoFirstNameLabel.setText( student.getFirstName() );
-                            infoLastNameLabel.setText( student.getLastName() );
-                            infoAgeLabel.setText( String.valueOf( student.getAge() ) );
-                            infoGenderLabel.setText( student.getGender() );
-                            infoYearLevelLabel.setText( String.valueOf( student.getYearLevel() ) );
-                            infoProgramLabel.setText( student.getProgram() );
-                            if ( student.getGender().equals( "Male" ) ) infoStudentImage.setImage( new Image( this.getClass().getResourceAsStream( "/com/project/crud/images/male-student.png" ) ) );
-                            else infoStudentImage.setImage( new Image( this.getClass().getResourceAsStream( "/com/project/crud/images/female-student.png" ) ) );
-
-                            studentInfoPane.toFront();
-                        }
-                    }
-                }
-            };
-        }
-
-        grid.getChildren().clear();
-        viewSign.setImage( new Image( this.getClass().getResourceAsStream( "/com/project/crud/images/loading.png" ) ) );
-        viewSign.setVisible( true );
-
-        Service< Void > backgroundTask  = new Service<Void>() {
-
+        Task< Void > getStudentsTask = new Task< Void >() {
             @Override
-            protected Task<Void> createTask() {
-                return new Task<Void>() {
+            protected Void call() throws Exception {
 
-                    @Override
-                    protected Void call() throws Exception {
+                List< Student > students = new ArrayList<>();
 
-                        Platform.runLater( () -> {
-                            int column = 0;
-                            int row = 1;
+                try {
+                    read = new BufferedReader( new FileReader( "database/students-list.txt" ) );
 
-                            try {
-                                for ( Student student : students ) {
-                                    FXMLLoader loader = new FXMLLoader();
-                                    loader.setLocation( getClass().getResource( "/com/project/crud/components/student-model.fxml" ) );
-                                    VBox vbox = loader.load();
+                    String s;
+                    while ( ( s = read.readLine() ) != null ) {
+                        if ( s.trim().isEmpty() ) continue;
 
-                                    StudentController studentController = loader.getController();
-                                    studentController.setData( student, listener );
-
-                                    if ( column == 4 ) {
-                                        column = 0;
-                                        row++;
-                                    }
-
-                                    grid.add( vbox, column++, row );
-                                    grid.setMinWidth( Region.USE_COMPUTED_SIZE );
-                                    grid.setPrefWidth( Region.USE_COMPUTED_SIZE );
-                                    grid.setMaxWidth( Region.USE_PREF_SIZE );
-
-                                    grid.setMinHeight( Region.USE_COMPUTED_SIZE );
-                                    grid.setPrefHeight( Region.USE_COMPUTED_SIZE );
-                                    grid.setMaxHeight( Region.USE_PREF_SIZE );
-
-                                    GridPane.setMargin( vbox, new Insets( 17 ) );
-                                }
-                            } catch ( IOException err ) {
-                                System.err.println( "Warning! IOException/InterruptedException has occurred at GridThread: " + err.getMessage() );
-                            } finally {
-                                if ( students.size() == 0 ) {
-                                    viewSign.setImage( new Image( this.getClass().getResourceAsStream( "/com/project/crud/images/no-entry-found.png" ) ) );
-                                    viewSign.setVisible( true );
-                                } else {
-                                    viewSign.setVisible( false );
-                                }
-                            }
-                        } );
-
-                        return null;
+                        String[] entry = s.split( "&" );
+                        students.add( new Student( Integer.parseInt( entry[0] ), entry[1], entry[2], Integer.parseInt( entry[3] ), Integer.parseInt( entry[4] ), entry[5], entry[6] ) );
                     }
-                };
+                } catch ( IOException err ) {
+                    System.err.println( "Warning! IOException has occurred at getStudents() function: " + err.getMessage() );
+                } finally {
+                    if ( read != null ) read.close();
+                    studentEntries.addAll( students );
+                }
+
+                return null;
             }
         };
 
-        backgroundTask.restart();
+        getStudentsTask.run();
+
+        return studentEntries;
+    }
+
+    public void addStudents( List< Student > studentsList ) {
+        grid.getChildren().clear();
+        viewSign.setImage( new Image( Objects.requireNonNull( this.getClass().getResourceAsStream("/com/project/crud/images/loading.png") ) ) );
+        viewSign.setVisible( true );
+
+        Task< Void > backgroundTask = new Task<Void>() {
+
+            @Override
+            protected Void call() throws Exception {
+                students.clear();
+                students.addAll( studentsList );
+                if ( sortingBox.getSelectionModel().getSelectedIndex() == 1 ) students.sort( Comparator.comparing( Student::getStudentNumber ) );
+                else if ( sortingBox.getSelectionModel().getSelectedIndex() == 2 ) students.sort( Comparator.comparing( Student::getLastName ) );
+                if ( students.size() > 0 ) {
+                    listener = new Listen() {
+                        @Override
+                        public void onClickListener( MouseEvent event, Student student ) {
+                            if ( event.getButton().equals( MouseButton.PRIMARY ) ) {
+                                selectedStudent = student;
+
+                                if ( event.getClickCount() == 2 ) {
+                                    infoStudentIdLabel.setText( String.valueOf( student.getStudentNumber() ) );
+                                    infoFirstNameLabel.setText( student.getFirstName() );
+                                    infoLastNameLabel.setText( student.getLastName() );
+                                    infoAgeLabel.setText( String.valueOf( student.getAge() ) );
+                                    infoGenderLabel.setText( student.getGender() );
+                                    infoYearLevelLabel.setText( String.valueOf( student.getYearLevel() ) );
+                                    infoProgramLabel.setText( student.getProgram() );
+                                    if ( student.getGender().equals( "Male" ) ) infoStudentImage.setImage( new Image( Objects.requireNonNull(this.getClass().getResourceAsStream("/com/project/crud/images/male-student.png") ) ) );
+                                    else infoStudentImage.setImage( new Image( Objects.requireNonNull(this.getClass().getResourceAsStream("/com/project/crud/images/female-student.png") ) ) );
+
+                                    studentInfoPane.toFront();
+                                }
+                            }
+                        }
+                    };
+                }
+
+                Platform.runLater( new Runnable() {
+                    @Override
+                    public void run() {
+                        int column = 0;
+                        int row = 1;
+
+                        try {
+                            for ( Student student : students ) {
+                                FXMLLoader loader = new FXMLLoader();
+                                loader.setLocation( getClass().getResource( "/com/project/crud/components/student-model.fxml" ) );
+                                VBox vbox = loader.load();
+
+                                StudentController studentController = loader.getController();
+                                studentController.setData( student, listener );
+
+                                if ( column == 4 ) {
+                                    column = 0;
+                                    row++;
+                                }
+
+                                grid.add( vbox, column++, row );
+                                grid.setMinWidth( Region.USE_COMPUTED_SIZE );
+                                grid.setPrefWidth( Region.USE_COMPUTED_SIZE );
+                                grid.setMaxWidth( Region.USE_PREF_SIZE );
+
+                                grid.setMinHeight( Region.USE_COMPUTED_SIZE );
+                                grid.setPrefHeight( Region.USE_COMPUTED_SIZE );
+                                grid.setMaxHeight( Region.USE_PREF_SIZE );
+
+                                GridPane.setMargin( vbox, new Insets( 17 ) );
+                            }
+                        } catch ( IOException err ) {
+                            System.err.println( "Warning! IOException/InterruptedException has occurred at GridThread: " + err.getMessage() );
+                        } finally {
+                            if ( students.size() == 0 ) {
+                                viewSign.setImage( new Image( Objects.requireNonNull( this.getClass().getResourceAsStream( "/com/project/crud/images/no-entry-found.png") ) ) );
+                                viewSign.setVisible( true );
+                            } else {
+                                viewSign.setVisible( false );
+                            }
+                        }
+                    }
+                } );
+
+                return null;
+            }
+        };
+
+        backgroundTask.run();
     }
 
     @FXML
@@ -237,7 +245,7 @@ public class CrudRedesignController implements Initializable  {
                     alert.setHeaderText( "You have successfully added a student." );
 
                     DialogPane dialog = alert.getDialogPane();
-                    dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+                    dialog.getStylesheets().add( Objects.requireNonNull( getClass().getResource( "/com/project/crud/styles/styles.css" ) ).toString() );
                     dialog.getStyleClass().add( "dialog" );
 
                     alert.showAndWait();
@@ -248,7 +256,7 @@ public class CrudRedesignController implements Initializable  {
                     alert.setContentText( "You should edit the entry instead." );
 
                     DialogPane dialog = alert.getDialogPane();
-                    dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+                    dialog.getStylesheets().add( Objects.requireNonNull( getClass().getResource( "/com/project/crud/styles/styles.css" ) ).toString() );
                     dialog.getStyleClass().add( "dialog" );
 
                     alert.showAndWait();
@@ -260,7 +268,7 @@ public class CrudRedesignController implements Initializable  {
                 alert.setContentText( "Please try again." );
 
                 DialogPane dialog = alert.getDialogPane();
-                dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+                dialog.getStylesheets().add( Objects.requireNonNull(getClass().getResource("/com/project/crud/styles/styles.css") ).toString() );
                 dialog.getStyleClass().add( "dialog" );
 
                 alert.showAndWait();
@@ -271,7 +279,7 @@ public class CrudRedesignController implements Initializable  {
                 alert.setContentText( "Please try again." );
 
                 DialogPane dialog = alert.getDialogPane();
-                dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+                dialog.getStylesheets().add( Objects.requireNonNull( getClass().getResource( "/com/project/crud/styles/styles.css") ).toString() );
                 dialog.getStyleClass().add( "dialog" );
 
                 alert.showAndWait();
@@ -283,7 +291,7 @@ public class CrudRedesignController implements Initializable  {
             alert.setContentText( "Please try again." );
 
             DialogPane dialog = alert.getDialogPane();
-            dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+            dialog.getStylesheets().add( Objects.requireNonNull( getClass().getResource( "/com/project/crud/styles/styles.css") ).toString() );
             dialog.getStyleClass().add( "dialog" );
 
             alert.showAndWait();
@@ -318,7 +326,7 @@ public class CrudRedesignController implements Initializable  {
         boolean success = false;
         try {
             read = new BufferedReader( new FileReader( "database/students-list.txt" ) );
-            StringBuffer fileContent = new StringBuffer();
+            StringBuilder fileContent = new StringBuilder();
 
             boolean studentIdIsNumber = checkIfNumber( editStudentIdField.getText().trim() );
             boolean ageIsNumber = checkIfNumber( editAgeField.getText().trim() );
@@ -355,7 +363,7 @@ public class CrudRedesignController implements Initializable  {
                 alert.setContentText( "Please try again." );
 
                 DialogPane dialog = alert.getDialogPane();
-                dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+                dialog.getStylesheets().add( Objects.requireNonNull( getClass().getResource("/com/project/crud/styles/styles.css") ).toString() );
                 dialog.getStyleClass().add( "dialog" );
 
                 alert.showAndWait();
@@ -366,7 +374,7 @@ public class CrudRedesignController implements Initializable  {
                 alert.setContentText( "Please try again." );
 
                 DialogPane dialog = alert.getDialogPane();
-                dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+                dialog.getStylesheets().add( Objects.requireNonNull( getClass().getResource( "/com/project/crud/styles/styles.css") ).toString() );
                 dialog.getStyleClass().add( "dialog" );
 
                 alert.showAndWait();
@@ -386,7 +394,7 @@ public class CrudRedesignController implements Initializable  {
                 alert.setHeaderText( "You have successfully edited a student entry." );
 
                 DialogPane dialog = alert.getDialogPane();
-                dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+                dialog.getStylesheets().add( Objects.requireNonNull( getClass().getResource( "/com/project/crud/styles/styles.css") ).toString() );
                 dialog.getStyleClass().add( "dialog" );
 
                 alert.showAndWait();
@@ -403,14 +411,14 @@ public class CrudRedesignController implements Initializable  {
         confirm.setHeaderText( "Would you like to delete " + selectedStudent.getFirstName() + "'s entry?" );
 
         DialogPane dialog = confirm.getDialogPane();
-        dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+        dialog.getStylesheets().add( Objects.requireNonNull( getClass().getResource("/com/project/crud/styles/styles.css") ).toString() );
         dialog.getStyleClass().add( "dialog" );
 
         Optional< ButtonType > result = confirm.showAndWait();
         if ( result.get() == ButtonType.OK) {
             try {
                 read = new BufferedReader( new FileReader( "database/students-list.txt" ) );
-                StringBuffer newFileContent = new StringBuffer();
+                StringBuilder newFileContent = new StringBuilder();
 
                 String s;
                 while ( ( s = read.readLine() ) != null ) {
@@ -440,7 +448,7 @@ public class CrudRedesignController implements Initializable  {
                     alert.setHeaderText( "You have successfully deleted a student entry." );
 
                     DialogPane dialogSuccess = alert.getDialogPane();
-                    dialogSuccess.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+                    dialogSuccess.getStylesheets().add( Objects.requireNonNull( getClass().getResource("/com/project/crud/styles/styles.css") ).toString() );
                     dialogSuccess.getStyleClass().add( "dialog" );
 
                     alert.showAndWait();
@@ -454,24 +462,34 @@ public class CrudRedesignController implements Initializable  {
         List< Student > students = new ArrayList<>();
 
         if ( !searchField.getText().trim().isEmpty() ) {
-            try {
-                read = new BufferedReader( new FileReader( "database/students-list.txt" ) );
+            Task< Void > searchStudentsTask = new Task<Void>() {
+                @Override
+                protected Void call() throws Exception {
 
-                String pattern = searchField.getText().replaceAll( " {1,}", "|" );
-                String s;
-                while ( ( s = read.readLine() ) != null ) {
-                    if ( !Pattern.compile( pattern, Pattern.CASE_INSENSITIVE ).matcher( s ).find() ) continue;
+                        try {
+                            read = new BufferedReader( new FileReader( "database/students-list.txt" ) );
 
-                    String[] entry = s.split( "&" );
-                    students.add( new Student( Integer.parseInt( entry[0] ), entry[1], entry[2], Integer.parseInt( entry[3] ), Integer.parseInt( entry[4] ), entry[5], entry[6] ) );
+                            String pattern = searchField.getText().replaceAll( " +", "|" );
+                            String s;
+                            while ( ( s = read.readLine() ) != null ) {
+                                if ( !Pattern.compile( pattern, Pattern.CASE_INSENSITIVE ).matcher( s ).find() ) continue;
+
+                                String[] entry = s.split( "&" );
+                                students.add( new Student( Integer.parseInt( entry[0] ), entry[1], entry[2], Integer.parseInt( entry[3] ), Integer.parseInt( entry[4] ), entry[5], entry[6] ) );
+                            }
+
+                            addStudents( students );
+                        } catch ( IOException err ) {
+                            System.err.println( "Warning! IOException has occurred at searchStudents() function: " + err.getMessage() );
+                        } finally {
+                            if ( read != null ) read.close();
+                        }
+
+                    return null;
                 }
+            };
 
-                addStudents( students );
-            } catch ( IOException err ) {
-                System.err.println( "Warning! IOException has occurred at searchStudents() function: " + err.getMessage() );
-            } finally {
-                if ( read != null ) read.close();
-            }
+            searchStudentsTask.run();
         } else {
             addStudents( getStudents() );
         }
@@ -479,8 +497,7 @@ public class CrudRedesignController implements Initializable  {
 
     @FXML
     void sortStudents() throws IOException {
-        List< Student > currentList = new ArrayList<>();
-        currentList.addAll( students );
+        List<Student> currentList = new ArrayList<>( students );
         addStudents( currentList );
     }
 
@@ -542,7 +559,7 @@ public class CrudRedesignController implements Initializable  {
             alert.setHeaderText( "You must choose a student first before opening the editing interface." );
 
             DialogPane dialog = alert.getDialogPane();
-            dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+            dialog.getStylesheets().add( Objects.requireNonNull( getClass().getResource("/com/project/crud/styles/styles.css") ).toString() );
             dialog.getStyleClass().add( "dialog" );
 
             alert.showAndWait();
@@ -575,7 +592,7 @@ public class CrudRedesignController implements Initializable  {
             alert.setHeaderText( "You must choose a student first before opening the delete interface." );
 
             DialogPane dialog = alert.getDialogPane();
-            dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+            dialog.getStylesheets().add( Objects.requireNonNull(getClass().getResource("/com/project/crud/styles/styles.css") ).toString() );
             dialog.getStyleClass().add( "dialog" );
 
             alert.showAndWait();
@@ -601,7 +618,7 @@ public class CrudRedesignController implements Initializable  {
         confirm.setHeaderText( "You are about to close the program.");
 
         DialogPane dialog = confirm.getDialogPane();
-        dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+        dialog.getStylesheets().add( Objects.requireNonNull( getClass().getResource("/com/project/crud/styles/styles.css") ).toString() );
         dialog.getStyleClass().add( "dialog" );
 
         Optional< ButtonType > result = confirm.showAndWait();
@@ -633,7 +650,7 @@ public class CrudRedesignController implements Initializable  {
         info.setContentText( "Simply click on the \"Add a Student\" button on the left side or press CTRL + A in your keyboard." );
 
         DialogPane dialog = info.getDialogPane();
-        dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+        dialog.getStylesheets().add( Objects.requireNonNull( getClass().getResource("/com/project/crud/styles/styles.css") ).toString() );
         dialog.getStyleClass().add( "dialog" );
 
         info.showAndWait();
@@ -647,7 +664,7 @@ public class CrudRedesignController implements Initializable  {
         info.setContentText( "You must click on a student first and simply click on the \"Edit a Student\" button on the left side or press CTRL + E in your keyboard." );
 
         DialogPane dialog = info.getDialogPane();
-        dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+        dialog.getStylesheets().add( Objects.requireNonNull( getClass().getResource("/com/project/crud/styles/styles.css") ).toString() );
         dialog.getStyleClass().add( "dialog" );
 
         info.showAndWait();
@@ -661,7 +678,7 @@ public class CrudRedesignController implements Initializable  {
         info.setContentText( "You must click on a student first and simply click on the \"Delete a Student\" button on the left side or press CTRL + D in your keyboard." );
 
         DialogPane dialog = info.getDialogPane();
-        dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+        dialog.getStylesheets().add( Objects.requireNonNull( getClass().getResource("/com/project/crud/styles/styles.css") ).toString() );
         dialog.getStyleClass().add( "dialog" );
 
         info.showAndWait();
@@ -674,7 +691,7 @@ public class CrudRedesignController implements Initializable  {
         info.setHeaderText( "This is a dashboard application, made in JavaFX that allows you to easily manage student information.");
 
         DialogPane dialog = info.getDialogPane();
-        dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+        dialog.getStylesheets().add( Objects.requireNonNull( getClass().getResource("/com/project/crud/styles/styles.css") ).toString() );
         dialog.getStyleClass().add( "dialog" );
 
         info.showAndWait();
@@ -688,7 +705,7 @@ public class CrudRedesignController implements Initializable  {
         info.setContentText( "Made by Team Positive.");
 
         DialogPane dialog = info.getDialogPane();
-        dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
+        dialog.getStylesheets().add( Objects.requireNonNull( getClass().getResource("/com/project/crud/styles/styles.css") ).toString() );
         dialog.getStyleClass().add( "dialog" );
 
         info.showAndWait();
