@@ -2,11 +2,11 @@ package com.project.crud.model;
 
 public class Student {
 
-    private int
+    private final int
             studentNumber,
             yearLevel,
             age;
-    private String
+    private final String
             firstName,
             lastName,
             gender,

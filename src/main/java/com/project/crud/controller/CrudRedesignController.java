@@ -48,8 +48,8 @@ public class CrudRedesignController implements Initializable  {
             infoStudentIdLabel, infoFirstNameLabel, infoLastNameLabel, infoAgeLabel, infoGenderLabel, infoYearLevelLabel, infoProgramLabel;
     @FXML private ImageView infoStudentImage, viewSign;
 
-    double xOffset;
-    double yOffset;
+    private double xOffset;
+    private double yOffset;
 
     private List<Student> students = new ArrayList<>();
     private Student selectedStudent;
@@ -60,20 +60,29 @@ public class CrudRedesignController implements Initializable  {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            addStudents( getStudents() );
-        } catch ( IOException err ) {
-            System.err.println( "Warning! IOException has occurred at initialize() function: " + err.getMessage() );
-        }
+        Task< Void > initializeTask = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                yearLevelBox.getItems().addAll( yearLevelList );
+                genderBox.getItems().addAll( genderList );
+                programBox.getItems().addAll( programList );
+                editYearLevelBox.getItems().addAll( yearLevelList );
+                editGenderBox.getItems().addAll( genderList );
+                editProgramBox.getItems().addAll( programList );
+                sortingBox.getItems().addAll( sortingList );
+                sortingBox.getSelectionModel().select( 0 );
 
-        yearLevelBox.getItems().addAll( yearLevelList );
-        genderBox.getItems().addAll( genderList );
-        programBox.getItems().addAll( programList );
-        editYearLevelBox.getItems().addAll( yearLevelList );
-        editGenderBox.getItems().addAll( genderList );
-        editProgramBox.getItems().addAll( programList );
-        sortingBox.getItems().addAll( sortingList );
-        sortingBox.getSelectionModel().select( 0 );
+                try {
+                    addStudents( getStudents() );
+                } catch ( IOException err ) {
+                    System.err.println( "Warning! IOException has occurred at initialize() function: " + err.getMessage() );
+                }
+
+                return null;
+            }
+        };
+
+        initializeTask.run();
     }
 
     public List< Student > getStudents() throws IOException {
@@ -324,6 +333,7 @@ public class CrudRedesignController implements Initializable  {
     @FXML
     void editStudent() throws IOException {
         boolean success = false;
+
         try {
             read = new BufferedReader( new FileReader( "database/students-list.txt" ) );
             StringBuilder fileContent = new StringBuilder();
