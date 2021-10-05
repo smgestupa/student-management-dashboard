@@ -371,33 +371,56 @@ public class CrudRedesignController implements Initializable  {
             boolean ageIsNumber = checkIfNumber( editAgeField.getText().trim() );
 
             if ( studentIdIsNumber && ageIsNumber ) {
-                String s;
-                while ( ( s = read.readLine() ) != null ) {
-                    if ( Pattern.compile( String.valueOf( selectedStudent.getStudentNumber() ) ).matcher( s ).find() ) {
-                        String studentNumber = ( !editStudentIdField.getText().trim().isEmpty() ) ? editStudentIdField.getText().trim() : String.valueOf( selectedStudent.getStudentNumber() );
-                        String firstName = ( !editFirstNameField.getText().trim().isEmpty() ) ? editFirstNameField.getText().trim() : selectedStudent.getFirstName();
-                        String lastName = ( !editLastNameField.getText().trim().isEmpty() ) ? editLastNameField.getText().trim() : selectedStudent.getLastName();
-                        String yearLevel = ( !editYearLevelBox.getSelectionModel().isEmpty() ) ? editYearLevelBox.getValue() : String.valueOf( selectedStudent.getYearLevel() );
-                        String age = ( !editAgeField.getText().trim().isEmpty() ) ? editAgeField.getText().trim() : String.valueOf( selectedStudent.getAge() );
-                        String gender = ( !editGenderBox.getSelectionModel().isEmpty() ) ? editGenderBox.getValue() : selectedStudent.getGender();
-                        String program = ( !editProgramBox.getSelectionModel().isEmpty() ) ? editProgramBox.getValue(): selectedStudent.getProgram();
+                boolean hasDuplicate = false;
 
-                        String image = ( editStudentImage.getImage().getUrl() != null ) ? editStudentImage.getImage().getUrl() : "null";
-                        selectedStudentNewImagePath = image;
-
-                        fileContent.append( studentNumber + "&" + firstName + "&" + lastName + "&" + yearLevel + "&" + age + "&" + gender + "&" + program + "&" + image );
-                        fileContent.append( "\n" );
-                        continue;
+                String d;
+                while ( ( d = read.readLine() ) != null ) {
+                    if ( Pattern.compile( editStudentIdField.getText().trim() ).matcher( d ).find() ) {
+                        hasDuplicate = true;
+                        break;
                     }
-
-                    fileContent.append( s );
-                    fileContent.append( "\n" );
                 }
 
-                write = new BufferedWriter( new FileWriter( "database/students-list.txt" ) );
-                write.write( fileContent.toString() );
+                if ( !hasDuplicate ) {
+                    String s;
+                    while ((s = read.readLine()) != null) {
+                        if (Pattern.compile(String.valueOf(selectedStudent.getStudentNumber())).matcher(s).find()) {
+                            String studentNumber = (!editStudentIdField.getText().trim().isEmpty()) ? editStudentIdField.getText().trim() : String.valueOf(selectedStudent.getStudentNumber());
+                            String firstName = (!editFirstNameField.getText().trim().isEmpty()) ? editFirstNameField.getText().trim() : selectedStudent.getFirstName();
+                            String lastName = (!editLastNameField.getText().trim().isEmpty()) ? editLastNameField.getText().trim() : selectedStudent.getLastName();
+                            String yearLevel = (!editYearLevelBox.getSelectionModel().isEmpty()) ? editYearLevelBox.getValue() : String.valueOf(selectedStudent.getYearLevel());
+                            String age = (!editAgeField.getText().trim().isEmpty()) ? editAgeField.getText().trim() : String.valueOf(selectedStudent.getAge());
+                            String gender = (!editGenderBox.getSelectionModel().isEmpty()) ? editGenderBox.getValue() : selectedStudent.getGender();
+                            String program = (!editProgramBox.getSelectionModel().isEmpty()) ? editProgramBox.getValue() : selectedStudent.getProgram();
 
-                success = true;
+                            String image = (editStudentImage.getImage().getUrl() != null) ? editStudentImage.getImage().getUrl() : "null";
+                            selectedStudentNewImagePath = image;
+
+                            fileContent.append(studentNumber + "&" + firstName + "&" + lastName + "&" + yearLevel + "&" + age + "&" + gender + "&" + program + "&" + image);
+                            fileContent.append("\n");
+                            continue;
+                        }
+
+                        fileContent.append(s);
+                        fileContent.append("\n");
+                    }
+
+                    write = new BufferedWriter(new FileWriter("database/students-list.txt"));
+                    write.write(fileContent.toString());
+
+                    success = true;
+                } else {
+                    Alert alert = new Alert( Alert.AlertType.WARNING );
+                    alert.setTitle( "Warning!" );
+                    alert.setHeaderText( "A duplicate has been found. The Student ID must be unique! " );
+                    alert.setContentText( "Please try again." );
+
+                    DialogPane dialog = alert.getDialogPane();
+                    dialog.getStylesheets().add( Objects.requireNonNull( getClass().getResource("/com/project/crud/styles/styles.css") ).toString() );
+                    dialog.getStyleClass().add( "dialog" );
+
+                    alert.showAndWait();
+                }
             } else if ( !studentIdIsNumber ) {
                 Alert alert = new Alert( Alert.AlertType.WARNING );
                 alert.setTitle( "Warning!" );
