@@ -23,7 +23,7 @@
             </Label>
          </children>
       </Pane>
-      <ImageView fx:id="studentGender" fitHeight="150.0" fitWidth="131.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="studentGender" fitHeight="132.0" fitWidth="131.0" pickOnBounds="true" VBox.vgrow="NEVER">
          <image>
             <Image url="@../images/male-student.png" />
          </image>

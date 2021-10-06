@@ -32,9 +32,9 @@ public class StudentController {
         firstNameLabel.setText( student.getFirstName() );
         lastNameLabel.setText( student.getLastName() );
 
-        if ( !student.getImagePath().equals( "null" ) ) {
-            studentGender.setImage( new Image( student.getImagePath() ) );
-        } else {
+        if ( !student.getImagePath().equals( "null" ) ) studentGender.setImage( new Image( student.getImagePath() ) );
+
+        if ( studentGender.getImage().isError() ) {
             if ( student.getGender().equals( "Male" ) ) studentGender.setImage( new Image( Objects.requireNonNull( this.getClass().getResourceAsStream("/com/project/crud/images/male-student.png") ) ) );
             else studentGender.setImage( new Image( Objects.requireNonNull( this.getClass().getResourceAsStream( "/com/project/crud/images/female-student.png") ) ) );
         }
