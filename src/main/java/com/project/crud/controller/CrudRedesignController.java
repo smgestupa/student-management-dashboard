@@ -56,6 +56,7 @@ public class CrudRedesignController implements Initializable  {
             viewSign;
 
     private String selectedStudentNewImagePath = "null";
+    private int lastId = 0;
 
     private double xOffset;
     private double yOffset;
@@ -103,7 +104,8 @@ public class CrudRedesignController implements Initializable  {
                         if ( s.trim().isEmpty() ) continue;
 
                         String[] entry = s.split( "&" );
-                        students.add( new Student( Integer.parseInt( entry[0] ), entry[1], entry[2], Integer.parseInt( entry[3] ), Integer.parseInt( entry[4] ), entry[5], entry[6], entry[7] ) );
+                        students.add( new Student( Integer.parseInt( entry[0] ), Integer.parseInt( entry[1] ), entry[2], entry[3], Integer.parseInt( entry[4] ), Integer.parseInt( entry[5] ), entry[6], entry[7], entry[8] ) );
+                        lastId = Integer.parseInt( entry[0] );
                     }
                 } catch ( IOException err ) {
                     System.err.println( "Warning! IOException has occurred at getStudents() function: " + err.getMessage() );
@@ -128,28 +130,23 @@ public class CrudRedesignController implements Initializable  {
         viewSign.setImage( new Image( Objects.requireNonNull( this.getClass().getResourceAsStream("/com/project/crud/images/loading.png") ) ) );
         viewSign.setVisible( true );
 
-        List< Student > studentsList = new ArrayList<>( givenList );
         Task< Void > backgroundTask = new Task<Void>() {
 
             @Override
             protected Void call() throws Exception {
 
                 students.clear();
-                students.addAll( studentsList );
+                students.addAll( givenList );
+
                 if ( sortingBox.getSelectionModel().getSelectedIndex() == 1 ) {
                     students.sort( Comparator.comparing( Student::getStudentNumber ) );
-                    studentsList.clear();
-                    studentsList.addAll( students );
                 } else if ( sortingBox.getSelectionModel().getSelectedIndex() == 2 ) {
-                        students.sort( Comparator.comparing( Student::getLastName ) );
-                        studentsList.clear();
-                        studentsList.addAll( students );
+                    students.sort( Comparator.comparing( Student::getLastName ) );
                 } else {
-                    studentsList.clear();
-                    studentsList.addAll( unsortedStudents );
+                    students.sort( Comparator.comparing( Student::getId ) );
                 }
 
-                if ( studentsList.size() > 0 ) {
+                if ( students.size() > 0 ) {
                     listener = new Listen() {
                         @Override
                         public void onClickListener( MouseEvent event, Student student ) {
@@ -167,10 +164,11 @@ public class CrudRedesignController implements Initializable  {
 
                                     if ( !student.getImagePath().equals( "null" ) ) infoStudentImage.setImage( new Image( student.getImagePath() ) );
 
-                                    if ( infoStudentImage.getImage().isError() ) {
+                                    if ( infoStudentImage.getImage().isError() || student.getImagePath().equals( "null" ) ) {
                                         if ( student.getGender().equals( "Male" ) ) infoStudentImage.setImage( new Image( Objects.requireNonNull(this.getClass().getResourceAsStream("/com/project/crud/images/male-student.png") ) ) );
                                         else infoStudentImage.setImage( new Image( Objects.requireNonNull(this.getClass().getResourceAsStream("/com/project/crud/images/female-student.png") ) ) );
                                     }
+
 
                                     studentInfoPane.toFront();
                                 }
@@ -186,7 +184,7 @@ public class CrudRedesignController implements Initializable  {
                         int row = 1;
 
                         try {
-                            for ( Student student : studentsList ) {
+                            for ( Student student : students ) {
                                 FXMLLoader loader = new FXMLLoader();
                                 loader.setLocation( getClass().getResource( "/com/project/crud/components/student-model.fxml" ) );
                                 VBox vbox = loader.load();
@@ -284,7 +282,7 @@ public class CrudRedesignController implements Initializable  {
 
                     try {
                         write = new BufferedWriter( new FileWriter( "database/students-list.txt", true ) );
-                        write.append( studentId + "&" + firstName + "&" + lastName + "&" + yearLevel + "&" + age + "&" + gender + "&" + program + "&" + imagePath );
+                        write.append( ++lastId + "&" + studentId + "&" + firstName + "&" + lastName + "&" + yearLevel + "&" + age + "&" + gender + "&" + program + "&" + imagePath );
                         write.append( "\n" );
                     } catch ( IOException err ) {
                         System.err.println( "Warning! IOException has occurred at addStudent() function: " + err.getMessage() );
@@ -388,6 +386,7 @@ public class CrudRedesignController implements Initializable  {
 
             if ( ageIsNumber ) {
                     String s;
+                    int id = 0;
                     while ((s = read.readLine()) != null) {
                         if (Pattern.compile(String.valueOf(selectedStudent.getStudentNumber())).matcher(s).find()) {
                             String firstName = (!editFirstNameField.getText().trim().isEmpty()) ? editFirstNameField.getText().trim() : selectedStudent.getFirstName();
@@ -400,13 +399,17 @@ public class CrudRedesignController implements Initializable  {
                             String image = (editStudentImage.getImage().getUrl() != null) ? editStudentImage.getImage().getUrl() : "null";
                             selectedStudentNewImagePath = image;
 
-                            fileContent.append( selectedStudent.getStudentNumber() + "&" + firstName + "&" + lastName + "&" + yearLevel + "&" + age + "&" + gender + "&" + program + "&" + image );
+                            fileContent.append( id + "&" + selectedStudent.getStudentNumber() + "&" + firstName + "&" + lastName + "&" + yearLevel + "&" + age + "&" + gender + "&" + program + "&" + image );
                             fileContent.append("\n");
+
+                            id++;
                             continue;
                         }
 
                         fileContent.append(s);
                         fileContent.append("\n");
+
+                        id++;
                     }
 
                     write = new BufferedWriter(new FileWriter("database/students-list.txt"));
@@ -517,11 +520,13 @@ public class CrudRedesignController implements Initializable  {
 
                             String pattern = searchField.getText().replaceAll( " +", "|" );
                             String s;
+                            int id = 0;
                             while ( ( s = read.readLine() ) != null ) {
                                 if ( !Pattern.compile( pattern, Pattern.CASE_INSENSITIVE ).matcher( s ).find() ) continue;
 
                                 String[] entry = s.split( "&" );
-                                students.add( new Student( Integer.parseInt( entry[0] ), entry[1], entry[2], Integer.parseInt( entry[3] ), Integer.parseInt( entry[4] ), entry[5], entry[6], entry[7] ) );
+                                students.add( new Student( Integer.parseInt( entry[0] ), Integer.parseInt( entry[1] ), entry[2], entry[3], Integer.parseInt( entry[4] ), Integer.parseInt( entry[5] ), entry[6], entry[7], entry[8] ) );
+
                             }
 
                             addStudents( students );
@@ -596,7 +601,7 @@ public class CrudRedesignController implements Initializable  {
             if ( !selectedStudentNewImagePath.isEmpty() && !selectedStudentNewImagePath.equals( "null" ) ) editStudentImage.setImage( new Image( selectedStudentNewImagePath ) );
             else if ( !selectedStudent.getImagePath().equals( "null") ) editStudentImage.setImage( new Image( selectedStudent.getImagePath() ) );
 
-            if ( editStudentImage.getImage().isError() ) {
+            if ( editStudentImage.getImage().isError() || selectedStudent.getImagePath().equals( "null" ) ) {
                 if ( selectedStudent.getGender().equals( "Male" ) ) editStudentImage.setImage( new Image( Objects.requireNonNull( this.getClass().getResourceAsStream("/com/project/crud/images/male-student.png" ) ) ) );
                 else editStudentImage.setImage( new Image( Objects.requireNonNull( this.getClass().getResourceAsStream("/com/project/crud/images/female-student.png" ) ) ) );
             }
@@ -638,7 +643,7 @@ public class CrudRedesignController implements Initializable  {
             if ( !selectedStudentNewImagePath.isEmpty() && !selectedStudentNewImagePath.equals( "null" ) ) deleteStudentImage.setImage( new Image( selectedStudentNewImagePath ) );
             else if ( !selectedStudent.getImagePath().equals( "null") ) deleteStudentImage.setImage( new Image( selectedStudent.getImagePath() ) );
 
-            if ( deleteStudentImage.getImage().isError() ) {
+            if ( deleteStudentImage.getImage().isError() || selectedStudent.getImagePath().equals( "null" ) ) {
                 if ( selectedStudent.getGender().equals( "Male" ) ) deleteStudentImage.setImage( new Image( Objects.requireNonNull( this.getClass().getResourceAsStream("/com/project/crud/images/male-student.png" ) ) ) );
                 else deleteStudentImage.setImage( new Image( Objects.requireNonNull( this.getClass().getResourceAsStream("/com/project/crud/images/female-student.png" ) ) ) );
             }

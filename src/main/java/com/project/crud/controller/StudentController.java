@@ -34,7 +34,7 @@ public class StudentController {
 
         if ( !student.getImagePath().equals( "null" ) ) studentGender.setImage( new Image( student.getImagePath() ) );
 
-        if ( studentGender.getImage().isError() ) {
+        if ( studentGender.getImage().isError() || student.getImagePath().equals( "null" ) ) {
             if ( student.getGender().equals( "Male" ) ) studentGender.setImage( new Image( Objects.requireNonNull( this.getClass().getResourceAsStream("/com/project/crud/images/male-student.png") ) ) );
             else studentGender.setImage( new Image( Objects.requireNonNull( this.getClass().getResourceAsStream( "/com/project/crud/images/female-student.png") ) ) );
         }

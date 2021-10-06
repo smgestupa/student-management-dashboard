@@ -3,6 +3,7 @@ package com.project.crud.model;
 public class Student {
 
     private final int
+            id,
             studentNumber,
             yearLevel,
             age;
@@ -13,7 +14,8 @@ public class Student {
             program,
             imagePath;
 
-    public Student( int studentNumber, String firstName, String lastName, int yearLevel, int age, String gender, String program, String imagePath ) {
+    public Student( int id, int studentNumber, String firstName, String lastName, int yearLevel, int age, String gender, String program, String imagePath ) {
+        this.id = id;
         this.studentNumber = studentNumber;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -22,6 +24,10 @@ public class Student {
         this.gender = gender;
         this.program = program;
         this.imagePath = imagePath;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public int getStudentNumber() {

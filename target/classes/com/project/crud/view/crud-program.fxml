@@ -131,6 +131,9 @@
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
+                                 <image>
+                                    <Image url="@../images/no-image.png" />
+                                 </image>
                               </ImageView>
                            </children>
                         </Pane>
@@ -255,6 +258,9 @@
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
+                                 <image>
+                                    <Image url="@../images/no-image.png" />
+                                 </image>
                               </ImageView>
                            </children>
                         </Pane>
@@ -444,7 +450,10 @@
                               </Pane>
                               <Pane prefHeight="246.0" prefWidth="396.0">
                                  <children>
-                                    <ImageView fx:id="infoStudentImage" fitHeight="210.0" fitWidth="217.0" layoutX="90.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="infoStudentImage" fitHeight="210.0" fitWidth="217.0" layoutX="90.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/no-image.png" />
+                                       </image></ImageView>
                                  </children>
                               </Pane>
                               <Pane prefHeight="47.0" prefWidth="396.0">
