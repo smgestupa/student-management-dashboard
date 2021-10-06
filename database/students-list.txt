@@ -1,9 +1,5 @@
-0&2010709&Shawn Michael&Gestupa&2&19&Male&College of Information Technology Education&file:/C:/Users/workstation/Downloads/images.jpg
-1&214124521&Testing&Student&1&213&Male&College of Arts&null
-2&20169&Bruh&Momentum&2&69&Male&College of Information Technology Education&file:/C:/Users/workstation/Downloads/1568991369356.png
-3&2132141&Sga&wdawd&1&23&Male&College of Arts&null
-4&21321421&awdawd&awdaw&1&23&Female&College of Arts&null
-5&21312421&Shawd&2213&1&2323&Male&College of Arts&null
-6&12412421&ada&awdaw&1&23&Male&College of Arts&null
-7&215421521&awdaw&awda&1&23&Male&College of Arts&null
-8&12321321&shouldBe8&daw&1&23&Male&College of Arts&null
+0&2010709&Shawn Michael&Gestupa&2&19&Male&College of Information Technology Education&file:/C:/Users/workstation/Downloads/maxresdefault.jpg
+1&69420&Andrei Jan&Santos&1&69&Male&College of Arts&file:/C:/Users/workstation/Downloads/71079919_2531916533533923_8049162939162165248_n.jpg
+2&3124123&Prince Kyle&Baguinaon&1&12312421&Male&College of Arts&file:/C:/Users/workstation/Downloads/profilePic.jpg
+3&421321&John&Diego Jr.&2&123&Male&College of Information Technology Education&file:/C:/Users/workstation/Downloads/test.jpg
+4&21321421&Rosh Miguel&Bernabe&2&123&Male&College of Information Technology Education&file:/C:/Users/workstation/Downloads/1568991369356.png

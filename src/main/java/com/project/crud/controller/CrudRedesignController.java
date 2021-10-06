@@ -55,7 +55,7 @@ public class CrudRedesignController implements Initializable  {
             infoStudentImage,
             viewSign;
 
-    private String selectedStudentNewImagePath = "null";
+//    private String[] selectedStudentNewImagePath = { "null", "null" };
     private int lastId = 0;
 
     private double xOffset;
@@ -138,13 +138,9 @@ public class CrudRedesignController implements Initializable  {
                 students.clear();
                 students.addAll( givenList );
 
-                if ( sortingBox.getSelectionModel().getSelectedIndex() == 1 ) {
-                    students.sort( Comparator.comparing( Student::getStudentNumber ) );
-                } else if ( sortingBox.getSelectionModel().getSelectedIndex() == 2 ) {
-                    students.sort( Comparator.comparing( Student::getLastName ) );
-                } else {
-                    students.sort( Comparator.comparing( Student::getId ) );
-                }
+                if ( sortingBox.getSelectionModel().getSelectedIndex() == 1 ) students.sort( Comparator.comparing( Student::getStudentNumber ) );
+                else if ( sortingBox.getSelectionModel().getSelectedIndex() == 2 ) students.sort( Comparator.comparing( Student::getLastName ) );
+                else students.sort( Comparator.comparing( Student::getId ) );
 
                 if ( students.size() > 0 ) {
                     listener = new Listen() {
@@ -397,7 +393,8 @@ public class CrudRedesignController implements Initializable  {
                             String program = (!editProgramBox.getSelectionModel().isEmpty()) ? editProgramBox.getValue() : selectedStudent.getProgram();
 
                             String image = (editStudentImage.getImage().getUrl() != null) ? editStudentImage.getImage().getUrl() : "null";
-                            selectedStudentNewImagePath = image;
+
+                            selectedStudent = new Student( id, selectedStudent.getStudentNumber(), firstName, lastName, Integer.parseInt( yearLevel ), Integer.parseInt( age ), gender, program , image );
 
                             fileContent.append( id + "&" + selectedStudent.getStudentNumber() + "&" + firstName + "&" + lastName + "&" + yearLevel + "&" + age + "&" + gender + "&" + program + "&" + image );
                             fileContent.append("\n");
@@ -598,14 +595,13 @@ public class CrudRedesignController implements Initializable  {
             editButton.getStyleClass().add( "button-selected" );
             deleteButton.getStyleClass().add( "button" );
 
-            if ( !selectedStudentNewImagePath.isEmpty() && !selectedStudentNewImagePath.equals( "null" ) ) editStudentImage.setImage( new Image( selectedStudentNewImagePath ) );
-            else if ( !selectedStudent.getImagePath().equals( "null") ) editStudentImage.setImage( new Image( selectedStudent.getImagePath() ) );
+            editStudentImage.setImage( null );
+            editStudentImage.setImage( new Image( selectedStudent.getImagePath() ) );
 
             if ( editStudentImage.getImage().isError() || selectedStudent.getImagePath().equals( "null" ) ) {
                 if ( selectedStudent.getGender().equals( "Male" ) ) editStudentImage.setImage( new Image( Objects.requireNonNull( this.getClass().getResourceAsStream("/com/project/crud/images/male-student.png" ) ) ) );
                 else editStudentImage.setImage( new Image( Objects.requireNonNull( this.getClass().getResourceAsStream("/com/project/crud/images/female-student.png" ) ) ) );
             }
-
 
             editStudentIdLabel.setText( String.valueOf( selectedStudent.getStudentNumber() ) );
             editFirstNameField.setText( selectedStudent.getFirstName() );
@@ -640,8 +636,10 @@ public class CrudRedesignController implements Initializable  {
             editButton.getStyleClass().add( "button" );
             deleteButton.getStyleClass().add( "button-selected" );
 
-            if ( !selectedStudentNewImagePath.isEmpty() && !selectedStudentNewImagePath.equals( "null" ) ) deleteStudentImage.setImage( new Image( selectedStudentNewImagePath ) );
-            else if ( !selectedStudent.getImagePath().equals( "null") ) deleteStudentImage.setImage( new Image( selectedStudent.getImagePath() ) );
+            deleteStudentImage.setImage( null );
+
+            deleteStudentImage.setImage( null );
+            deleteStudentImage.setImage( new Image( selectedStudent.getImagePath() ) );
 
             if ( deleteStudentImage.getImage().isError() || selectedStudent.getImagePath().equals( "null" ) ) {
                 if ( selectedStudent.getGender().equals( "Male" ) ) deleteStudentImage.setImage( new Image( Objects.requireNonNull( this.getClass().getResourceAsStream("/com/project/crud/images/male-student.png" ) ) ) );
@@ -704,7 +702,7 @@ public class CrudRedesignController implements Initializable  {
 
     boolean checkIfNumber( String input ) {
         try {
-            Integer.parseInt( input );
+            Integer.parseInt( input.trim() );
             return true;
         } catch ( NumberFormatException err ) {
             return false;
