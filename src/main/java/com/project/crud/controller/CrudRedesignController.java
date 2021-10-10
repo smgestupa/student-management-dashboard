@@ -506,28 +506,27 @@ public class CrudRedesignController implements Initializable  {
                 @Override
                 protected Void call() throws Exception {
 
-                        try {
-                            read = new BufferedReader( new FileReader( "database/students-list.txt" ) );
+                    try {
+                        read = new BufferedReader(new FileReader("database/students-list.txt"));
+                        String pattern = searchField.getText().replaceAll(" +", "|");
+                        String s;
+                        while ((s = read.readLine()) != null) {
+                            if (!Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(s).find()) continue;
 
-                            String pattern = searchField.getText().replaceAll( " +", "|" );
-                            String s;
-                            while ( ( s = read.readLine() ) != null ) {
-                                if ( !Pattern.compile( pattern, Pattern.CASE_INSENSITIVE ).matcher( s ).find() ) continue;
-
-                                String[] entry = s.split( "&" );
-                                students.add( new Student( Integer.parseInt( entry[0] ), entry[1], entry[2], Integer.parseInt( entry[3] ), Integer.parseInt( entry[4] ), entry[5], entry[6], entry[7] ) );
-                            }
-
-                            addStudents( students );
-                        } catch ( IOException err ) {
-                            System.err.println( "Warning! IOException has occurred at searchStudents() function: " + err.getMessage() );
-                        } finally {
-                            if ( read != null ) read.close();
+                            String[] entry = s.split("&");
+                            students.add(new Student(Integer.parseInt(entry[0]), entry[1], entry[2], Integer.parseInt(entry[3]), Integer.parseInt(entry[4]), entry[5], entry[6], entry[7]));
                         }
 
-                    return null;
-                }
-            };
+                            addStudents(students);
+                        } catch(IOException err ){
+                            System.err.println("Warning! IOException has occurred at searchStudents() function: " + err.getMessage());
+                        } finally{
+                            if (read != null) read.close();
+                        }
+
+                        return null;
+                    }
+                };
 
             searchStudentsTask.run();
         } else {
@@ -537,7 +536,8 @@ public class CrudRedesignController implements Initializable  {
 
     @FXML
     void sortStudents() throws IOException {
-        List<Student> currentList = new ArrayList<>( students );
+        List< Student > currentList = new ArrayList<>();
+        currentList.addAll( students );
         addStudents( currentList );
     }
 
@@ -613,6 +613,7 @@ public class CrudRedesignController implements Initializable  {
 
             DialogPane dialog = alert.getDialogPane();
             dialog.getStylesheets().add( Objects.requireNonNull( getClass().getResource("/com/project/crud/styles/styles.css") ).toString() );
+            dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
             dialog.getStyleClass().add( "dialog" );
 
             alert.showAndWait();
@@ -660,6 +661,7 @@ public class CrudRedesignController implements Initializable  {
 
             DialogPane dialog = alert.getDialogPane();
             dialog.getStylesheets().add( Objects.requireNonNull(getClass().getResource("/com/project/crud/styles/styles.css") ).toString() );
+            dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
             dialog.getStyleClass().add( "dialog" );
 
             alert.showAndWait();
@@ -686,6 +688,7 @@ public class CrudRedesignController implements Initializable  {
 
         DialogPane dialog = confirm.getDialogPane();
         dialog.getStylesheets().add( Objects.requireNonNull( getClass().getResource("/com/project/crud/styles/styles.css") ).toString() );
+        dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
         dialog.getStyleClass().add( "dialog" );
 
         Optional< ButtonType > result = confirm.showAndWait();
@@ -718,6 +721,7 @@ public class CrudRedesignController implements Initializable  {
 
         DialogPane dialog = info.getDialogPane();
         dialog.getStylesheets().add( Objects.requireNonNull( getClass().getResource("/com/project/crud/styles/styles.css") ).toString() );
+        dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
         dialog.getStyleClass().add( "dialog" );
 
         info.showAndWait();
@@ -732,6 +736,7 @@ public class CrudRedesignController implements Initializable  {
 
         DialogPane dialog = info.getDialogPane();
         dialog.getStylesheets().add( Objects.requireNonNull( getClass().getResource("/com/project/crud/styles/styles.css") ).toString() );
+        dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
         dialog.getStyleClass().add( "dialog" );
 
         info.showAndWait();
@@ -746,6 +751,7 @@ public class CrudRedesignController implements Initializable  {
 
         DialogPane dialog = info.getDialogPane();
         dialog.getStylesheets().add( Objects.requireNonNull( getClass().getResource("/com/project/crud/styles/styles.css") ).toString() );
+        dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
         dialog.getStyleClass().add( "dialog" );
 
         info.showAndWait();
@@ -759,6 +765,7 @@ public class CrudRedesignController implements Initializable  {
 
         DialogPane dialog = info.getDialogPane();
         dialog.getStylesheets().add( Objects.requireNonNull( getClass().getResource("/com/project/crud/styles/styles.css") ).toString() );
+        dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
         dialog.getStyleClass().add( "dialog" );
 
         info.showAndWait();
@@ -773,6 +780,7 @@ public class CrudRedesignController implements Initializable  {
 
         DialogPane dialog = info.getDialogPane();
         dialog.getStylesheets().add( Objects.requireNonNull( getClass().getResource("/com/project/crud/styles/styles.css") ).toString() );
+        dialog.getStylesheets().add( getClass().getResource( "/com/project/crud/styles/styles.css" ).toString() );
         dialog.getStyleClass().add( "dialog" );
 
         info.showAndWait();
