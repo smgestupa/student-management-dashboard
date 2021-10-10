@@ -2,14 +2,12 @@
 This is my group's final project to one of our courses on Object-Oriented Programming, utilizing JavaFX to create a GUI. Everything in this project is done based on our professor's criteria.
 
 # Screenshots
-![](screenshots/first-screenshot.png)
+![](screenshots/program-overview.png)
 
-![](screenshots/second-screenshot.png)
+![](screenshots/add-panel.png)
 
-![](screenshots/third-screenshot.png)
+![](screenshots/edit-panel.png)
 
-![](screenshots/fourth-screenshot.png)
+![](screenshots/delete-panel.png)
 
-![](screenshots/fifth-screenshot.png)
-
-![](screenshots/sixth-screenshot.png)
+![](screenshots/read-student.png)
