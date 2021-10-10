@@ -2,17 +2,18 @@ package com.project.crud.model;
 
 public class Student {
 
-    private int
+    private final int
             studentNumber,
             yearLevel,
             age;
-    private String
+    private final String
             firstName,
             lastName,
             gender,
-            program;
+            program,
+            imagePath;
 
-    public Student( int studentNumber, String firstName, String lastName, int yearLevel, int age, String gender, String program ) {
+    public Student( int studentNumber, String firstName, String lastName, int yearLevel, int age, String gender, String program, String imagePath ) {
         this.studentNumber = studentNumber;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -20,6 +21,7 @@ public class Student {
         this.age = age;
         this.gender = gender;
         this.program = program;
+        this.imagePath = imagePath;
     }
 
     public int getStudentNumber() {
@@ -48,5 +50,9 @@ public class Student {
 
     public String getProgram() {
         return program;
+    }
+
+    public String getImagePath() {
+        return imagePath;
     }
 }

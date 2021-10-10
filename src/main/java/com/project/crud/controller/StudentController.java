@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class StudentController {
 
@@ -26,10 +27,16 @@ public class StudentController {
     public void setData( Student student, Listen listener ) throws IOException {
         this.student = student;
         this.listener = listener;
+
         studentIdLabel.setText( String.valueOf( student.getStudentNumber() ) );
         firstNameLabel.setText( student.getFirstName() );
         lastNameLabel.setText( student.getLastName() );
-        if ( student.getGender().equals( "Male" ) ) studentGender.setImage( new Image( this.getClass().getResourceAsStream( "/com/project/crud/images/male-student.png" ) ) );
-            else studentGender.setImage( new Image( this.getClass().getResourceAsStream( "/com/project/crud/images/female-student.png" ) ) );
+
+        if ( !student.getImagePath().equals( "null" ) ) studentGender.setImage( new Image( student.getImagePath() ) );
+
+        if ( studentGender.getImage().isError() || student.getImagePath().equals( "null" ) ) {
+            if ( student.getGender().equals( "Male" ) ) studentGender.setImage( new Image( Objects.requireNonNull( this.getClass().getResourceAsStream("/com/project/crud/images/male-student.png") ) ) );
+            else studentGender.setImage( new Image( Objects.requireNonNull( this.getClass().getResourceAsStream( "/com/project/crud/images/female-student.png") ) ) );
+        }
     }
 }
