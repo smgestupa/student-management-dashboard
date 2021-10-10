@@ -1,0 +1,122 @@
+.menu-bar {
+  -fx-background-color: #202225;
+}
+
+.menu-button {
+  -fx-padding: 5px 16px;
+}
+
+.menu-button .label {
+  -fx-text-fill: white;
+}
+
+.menu-button:hover {
+  -fx-background-color: #34373c;
+}
+
+.menu-button:focused {
+  -fx-background-color: #34373c;
+}
+
+.menu-button:showing {
+  -fx-background-color: #34373c;
+}
+
+
+.menu-item {
+  -fx-padding: 5px 16px;
+  -fx-background-color: #40444b;
+}
+
+.menu-item .label {
+   -fx-text-fill: white;
+}
+
+.menu-item:hover {
+  -fx-background-color: #34373c;
+  -fx-cursor: hand;
+}
+
+.context-menu {
+    -fx-background-color: #34373c;
+}
+
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
+
+.scroll-pane {
+   -fx-background-color: transparent;
+}
+
+.scroll-bar {
+   -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #202225;
+    -fx-background-radius: 9999px;
+}
+
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow {
+   -fx-shape : " ";
+}
+
+.text-field {
+   -fx-text-fill: white;
+   -fx-background-color: #40444b;
+   -fx-background-radius: 8px;
+   -fx-border-color: #272a2e;
+   -fx-border-width: 1;
+   -fx-border-radius: 8px;
+}
+
+.combo-box {
+   -fx-background-color: #40444b;
+   -fx-border-color: #272a2e;
+   -fx-border-width: 1;
+   -fx-cursor: hand;
+}
+
+.combo-box .cell {
+   -fx-text-fill: white;
+   -fx-background-color: #40444b;
+}
+
+.combo-box .cell:hover {
+   -fx-background-color: #34373c;
+   -fx-cursor: hand;
+}
+
+.dialog {
+   -fx-background-color: #36393f;
+ }
+
+ .dialog > *.content.label {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+  }
+
+ .dialog:header *.header-panel {
+   -fx-background-color: #202225;
+ }
+
+ .dialog:header *.header-panel *.label {
+    -fx-text-fill: white;
+ }
+
+ .dialog > *.button-bar *.button {
+   -fx-text-fill: white;
+   -fx-background-color: #40444b;
+   -fx-border-color: #272a2e;
+   -fx-border-width: 1;
+   -fx-border-radius: 8px;
+   -fx-background-radius: 8px;
+  }
+
+.dialog > *.button-bar:hover *.button:hover {
+   -fx-text-fill: white;
+   -fx-background-color: #34373c;
+   -fx-cursor: hand;
+}

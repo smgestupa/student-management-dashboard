@@ -1,0 +1,91 @@
+.button {
+    -fx-background-color: #36393f;
+    -fx-background-radius: 0px;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #2f3136;
+    -fx-background-radius: 0px;
+    -fx-cursor: hand;
+}
+
+.button-selected {
+    -fx-background-color: #2f3136;
+    -fx-background-radius: 0px;
+    -fx-cursor: hand;
+}
+
+.minimize-button {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+.minimize-button:hover {
+    -fx-background-color: #282b2e;
+    -fx-background-radius: 0px;
+}
+
+.close-button {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+.close-button:hover {
+    -fx-background-color: #ed4245;
+    -fx-background-radius: 0px;
+}
+
+.search-button {
+    -fx-font-size: 15px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-color: #5865f2;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+
+.search-button:hover {
+    -fx-font-size: 15px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-color: #4752c4;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+
+.default-button {
+    -fx-font-size: 20px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-color: #5865f2;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+
+.default-button:hover {
+    -fx-font-size: 20px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-color: #4752c4;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+
+.delete-button {
+    -fx-font-size: 20px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-color: #e13f42;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+
+.delete-button:hover {
+    -fx-font-size: 20px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-color: #c03537;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
