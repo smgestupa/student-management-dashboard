@@ -581,9 +581,9 @@
                         <ScrollPane prefHeight="200.0" prefWidth="200.0" stylesheets="@../styles/styles.css">
                            <content>
                               <GridPane fx:id="grid" alignment="TOP_CENTER" prefHeight="15.0" prefWidth="41.0">
-                                <rowConstraints>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                </rowConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
                               </GridPane>
                            </content>
                            <StackPane.margin>
@@ -630,10 +630,10 @@
                </children>
             </HBox>
             <MenuBar>
-              <menus>
-                <Menu mnemonicParsing="false" text="Actions">
-                  <items>
-                    <MenuItem mnemonicParsing="false" onAction="#openAddStudentPane" text="Add Student">
+               <menus>
+                  <Menu mnemonicParsing="false" text="Actions">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#openAddStudentPane" text="Add Student">
                            <accelerator>
                               <KeyCodeCombination alt="UP" code="A" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                            </accelerator></MenuItem>
@@ -645,8 +645,8 @@
                            <accelerator>
                               <KeyCodeCombination alt="UP" code="D" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                            </accelerator></MenuItem>
-                  </items>
-                </Menu>
+                     </items>
+                  </Menu>
                   <Menu mnemonicParsing="false" text="Help">
                      <items>
                         <MenuItem mnemonicParsing="false" onAction="#addStudentHelp" text="Adding a Student" />
@@ -660,7 +660,7 @@
                         <MenuItem mnemonicParsing="false" onAction="#programVersion" text="Version" />
                      </items>
                   </Menu>
-              </menus>
+               </menus>
             </MenuBar>
          </children>
       </VBox>
